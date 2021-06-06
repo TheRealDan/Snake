@@ -1,9 +1,11 @@
 package dev.therealdan.snake.screens;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import dev.therealdan.snake.game.Snake;
 import dev.therealdan.snake.game.SnakeGame;
 
 public class GameScreen implements Screen {
@@ -13,11 +15,15 @@ public class GameScreen implements Screen {
     private ScreenViewport viewport;
     private OrthographicCamera camera;
 
+    private Snake snake;
+
     public GameScreen(SnakeGame game) {
         this.game = game;
 
         camera = new OrthographicCamera();
         viewport = new ScreenViewport(camera);
+
+        snake = new Snake(Color.GREEN);
     }
 
     @Override
@@ -25,13 +31,15 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0.2f, 1);
 
         camera.update();
+        game.shapeRenderer.setProjectionMatrix(camera.combined);
         game.batch.setProjectionMatrix(camera.combined);
 
-        game.batch.begin();
-        // todo - do render
-        game.batch.end();
+        game.shapeRenderer.setAutoShapeType(true);
+        game.shapeRenderer.begin();
+        snake.render(game.shapeRenderer);
+        game.shapeRenderer.end();
 
-        // todo - do user input
+        snake.handleMovementControls(delta);
 
         // todo - do logics
     }
