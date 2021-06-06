@@ -2,7 +2,7 @@ package dev.therealdan.snake.desktop;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import dev.therealdan.snake.SnakeGame;
+import dev.therealdan.snake.game.SnakeGame;
 
 public class DesktopLauncher {
     public static void main(String[] arg) {

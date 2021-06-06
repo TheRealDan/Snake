@@ -1,8 +1,9 @@
-package dev.therealdan.snake;
+package dev.therealdan.snake.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import dev.therealdan.snake.screens.MainMenuScreen;
 
 public class SnakeGame extends Game {
 
