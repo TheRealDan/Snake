@@ -23,11 +23,20 @@ public class Snake {
             addBody();
     }
 
-    public void render(ShapeRenderer shapeRenderer) {
+    public void render(ShapeRenderer shapeRenderer, float worldWidth, float worldHeight) {
         shapeRenderer.setColor(color);
         shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
-        for (SnakeBody snakeBody : snakeBodies)
+        for (SnakeBody snakeBody : snakeBodies) {
             shapeRenderer.circle(snakeBody.x, snakeBody.y, snakeBody.radius);
+            shapeRenderer.circle(snakeBody.x + worldWidth, snakeBody.y, snakeBody.radius);
+            shapeRenderer.circle(snakeBody.x - worldWidth, snakeBody.y, snakeBody.radius);
+            shapeRenderer.circle(snakeBody.x, snakeBody.y + worldHeight, snakeBody.radius);
+            shapeRenderer.circle(snakeBody.x, snakeBody.y - worldHeight, snakeBody.radius);
+            shapeRenderer.circle(snakeBody.x + worldWidth, snakeBody.y + worldHeight, snakeBody.radius);
+            shapeRenderer.circle(snakeBody.x - worldWidth, snakeBody.y - worldHeight, snakeBody.radius);
+            shapeRenderer.circle(snakeBody.x + worldWidth, snakeBody.y - worldHeight, snakeBody.radius);
+            shapeRenderer.circle(snakeBody.x - worldWidth, snakeBody.y + worldHeight, snakeBody.radius);
+        }
     }
 
     public void handleMovementControls(float delta) {
@@ -35,6 +44,21 @@ public class Snake {
         if (Gdx.input.isKeyPressed(Input.Keys.S)) getHead().y -= 100 * delta;
         if (Gdx.input.isKeyPressed(Input.Keys.A)) getHead().x -= 100 * delta;
         if (Gdx.input.isKeyPressed(Input.Keys.D)) getHead().x += 100 * delta;
+    }
+
+    public void handleWorldLooping(float worldWidth, float worldHeight) {
+        SnakeBody head = getHead();
+        if (head.x > worldWidth / 2f) {
+            teleport(head.x - worldWidth, head.y);
+        } else if (head.x < -(worldWidth / 2f)) {
+            teleport(head.x + worldWidth, head.y);
+        }
+
+        if (head.y > worldHeight / 2f) {
+            teleport(head.x, head.y - worldHeight);
+        } else if (head.y < -(worldHeight / 2f)) {
+            teleport(head.x, head.y + worldHeight);
+        }
     }
 
     public void handleConnectedBody(float delta) {
@@ -49,6 +73,21 @@ public class Snake {
             }
 
             toFollow = snakeBody;
+        }
+    }
+
+    public void teleport(float x, float y) {
+        SnakeBody head = getHead();
+        float xOffset = head.x - x;
+        float yOffset = head.y - y;
+
+        head.x = x;
+        head.y = y;
+
+        for (SnakeBody snakeBody : snakeBodies) {
+            if (snakeBody.equals(head)) continue;
+            snakeBody.x -= xOffset;
+            snakeBody.y -= yOffset;
         }
     }
 

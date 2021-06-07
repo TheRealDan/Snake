@@ -14,6 +14,9 @@ public class GameInstance {
     public Snake snake;
     public List<Apple> apples = new ArrayList<>();
 
+    public float worldWidth;
+    public float worldHeight;
+
     private long lastAppleSpawn = System.currentTimeMillis();
     private long appleSpawnInterval = 2500;
 
@@ -25,10 +28,16 @@ public class GameInstance {
 
     public void loop(float delta) {
         snake.handleMovementControls(delta);
+        snake.handleWorldLooping(worldWidth, worldHeight);
         snake.handleConnectedBody(delta);
 
         handleConsumeApples();
         handleAppleSpawning();
+    }
+
+    public void resize(float width, float height) {
+        worldWidth = width;
+        worldHeight = height;
     }
 
     private void handleConsumeApples() {

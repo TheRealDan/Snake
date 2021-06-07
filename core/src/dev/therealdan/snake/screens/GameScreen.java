@@ -39,7 +39,7 @@ public class GameScreen implements Screen {
         app.shapeRenderer.begin();
         for (Apple apple : instance.apples)
             apple.render(app.shapeRenderer);
-        instance.snake.render(app.shapeRenderer);
+        instance.snake.render(app.shapeRenderer, instance.worldWidth, instance.worldHeight);
         app.shapeRenderer.end();
 
         app.batch.begin();
@@ -52,6 +52,7 @@ public class GameScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
+        instance.resize(width, height);
     }
 
     @Override
