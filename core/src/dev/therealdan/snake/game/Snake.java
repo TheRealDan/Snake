@@ -16,10 +16,11 @@ public class Snake {
     private Color color;
     private List<SnakeBody> snakeBodies = new ArrayList<>();
 
-    public Snake(Color color) {
+    public Snake(Color color, int length) {
         this.color = color;
 
-        addBody();
+        for (int i = 0; i < length; i++)
+            addBody();
     }
 
     public void render(ShapeRenderer shapeRenderer) {
@@ -34,6 +35,21 @@ public class Snake {
         if (Gdx.input.isKeyPressed(Input.Keys.S)) getHead().y -= 100 * delta;
         if (Gdx.input.isKeyPressed(Input.Keys.A)) getHead().x -= 100 * delta;
         if (Gdx.input.isKeyPressed(Input.Keys.D)) getHead().x += 100 * delta;
+    }
+
+    public void handleConnectedBody(float delta) {
+        SnakeBody head = getHead();
+        SnakeBody toFollow = head;
+        for (SnakeBody snakeBody : snakeBodies) {
+            if (snakeBody.equals(head)) continue;
+
+            if (!snakeBody.overlaps(toFollow)) {
+                snakeBody.x += (snakeBody.x > toFollow.x ? -1 : 1) * Math.abs(snakeBody.x - toFollow.x) * delta * 5;
+                snakeBody.y += (snakeBody.y > toFollow.y ? -1 : 1) * Math.abs(snakeBody.y - toFollow.y) * delta * 5;
+            }
+
+            toFollow = snakeBody;
+        }
     }
 
     public void addBody() {

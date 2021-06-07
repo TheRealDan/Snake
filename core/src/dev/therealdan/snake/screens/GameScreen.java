@@ -23,7 +23,7 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera();
         viewport = new ScreenViewport(camera);
 
-        snake = new Snake(Color.GREEN);
+        snake = new Snake(Color.GREEN, 4);
     }
 
     @Override
@@ -40,6 +40,7 @@ public class GameScreen implements Screen {
         game.shapeRenderer.end();
 
         snake.handleMovementControls(delta);
+        snake.handleConnectedBody(delta);
 
         // todo - do logics
     }
