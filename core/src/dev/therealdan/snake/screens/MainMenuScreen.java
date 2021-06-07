@@ -5,7 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import dev.therealdan.snake.game.SnakeGame;
+import dev.therealdan.snake.main.SnakeGame;
 
 public class MainMenuScreen implements Screen {
 

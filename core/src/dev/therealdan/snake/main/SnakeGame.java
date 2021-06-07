@@ -1,4 +1,4 @@
-package dev.therealdan.snake.game;
+package dev.therealdan.snake.main;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;

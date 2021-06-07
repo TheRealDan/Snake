@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import dev.therealdan.snake.game.Apple;
 import dev.therealdan.snake.game.Snake;
-import dev.therealdan.snake.game.SnakeGame;
+import dev.therealdan.snake.main.SnakeGame;
 
 import java.util.ArrayList;
 import java.util.List;
