@@ -5,21 +5,32 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import dev.therealdan.snake.game.Apple;
 import dev.therealdan.snake.game.Snake;
 import dev.therealdan.snake.game.SnakeGame;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class GameScreen implements Screen {
 
     final SnakeGame game;
 
+    private Random random;
     private ScreenViewport viewport;
     private OrthographicCamera camera;
 
     private Snake snake;
+    private List<Apple> apples = new ArrayList<>();
+
+    private long lastAppleSpawn = System.currentTimeMillis();
+    private long applySpawnInterval = 2500;
 
     public GameScreen(SnakeGame game) {
         this.game = game;
 
+        random = new Random();
         camera = new OrthographicCamera();
         viewport = new ScreenViewport(camera);
 
@@ -36,13 +47,26 @@ public class GameScreen implements Screen {
 
         game.shapeRenderer.setAutoShapeType(true);
         game.shapeRenderer.begin();
+        for (Apple apple : apples)
+            apple.render(game.shapeRenderer);
         snake.render(game.shapeRenderer);
         game.shapeRenderer.end();
 
         snake.handleMovementControls(delta);
         snake.handleConnectedBody(delta);
 
-        // todo - do logics
+        if (System.currentTimeMillis() - lastAppleSpawn > applySpawnInterval) {
+            lastAppleSpawn = System.currentTimeMillis();
+            apples.add(new Apple(random.nextInt(100), random.nextInt(100)));
+        }
+
+        for (Apple apple : apples) {
+            if (snake.overlaps(apple)) {
+                apples.remove(apple);
+                snake.addBody();
+                break;
+            }
+        }
     }
 
     @Override
