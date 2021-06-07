@@ -6,19 +6,19 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import dev.therealdan.snake.game.Apple;
 import dev.therealdan.snake.game.GameInstance;
-import dev.therealdan.snake.main.SnakeGame;
+import dev.therealdan.snake.main.SnakeApp;
 
 public class GameScreen implements Screen {
 
-    final SnakeGame game;
+    final SnakeApp app;
 
     private ScreenViewport viewport;
     private OrthographicCamera camera;
 
     private GameInstance instance;
 
-    public GameScreen(SnakeGame game) {
-        this.game = game;
+    public GameScreen(SnakeApp app) {
+        this.app = app;
 
         camera = new OrthographicCamera();
         viewport = new ScreenViewport(camera);
@@ -31,15 +31,15 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0.2f, 1);
 
         camera.update();
-        game.shapeRenderer.setProjectionMatrix(camera.combined);
-        game.batch.setProjectionMatrix(camera.combined);
+        app.shapeRenderer.setProjectionMatrix(camera.combined);
+        app.batch.setProjectionMatrix(camera.combined);
 
-        game.shapeRenderer.setAutoShapeType(true);
-        game.shapeRenderer.begin();
+        app.shapeRenderer.setAutoShapeType(true);
+        app.shapeRenderer.begin();
         for (Apple apple : instance.apples)
-            apple.render(game.shapeRenderer);
-        instance.snake.render(game.shapeRenderer);
-        game.shapeRenderer.end();
+            apple.render(app.shapeRenderer);
+        instance.snake.render(app.shapeRenderer);
+        app.shapeRenderer.end();
 
         instance.loop(delta);
     }

@@ -5,17 +5,17 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import dev.therealdan.snake.main.SnakeGame;
+import dev.therealdan.snake.main.SnakeApp;
 
 public class MainMenuScreen implements Screen {
 
-    final SnakeGame game;
+    final SnakeApp app;
 
     private ScreenViewport viewport;
     private OrthographicCamera camera;
 
-    public MainMenuScreen(final SnakeGame game) {
-        this.game = game;
+    public MainMenuScreen(final SnakeApp app) {
+        this.app = app;
 
         camera = new OrthographicCamera();
         viewport = new ScreenViewport(camera);
@@ -26,14 +26,14 @@ public class MainMenuScreen implements Screen {
         ScreenUtils.clear(0, 0.15f, 0.2f, 1);
 
         camera.update();
-        game.batch.setProjectionMatrix(camera.combined);
+        app.batch.setProjectionMatrix(camera.combined);
 
-        game.batch.begin();
-        game.font.center(game.batch, "Click to Start", 0, 0, 16);
-        game.batch.end();
+        app.batch.begin();
+        app.font.center(app.batch, "Click to Start", 0, 0, 16);
+        app.batch.end();
 
         if (Gdx.input.isTouched()) {
-            game.setScreen(new GameScreen(game));
+            app.setScreen(new GameScreen(app));
             dispose();
         }
     }

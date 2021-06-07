@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dev.therealdan.snake.screens.MainMenuScreen;
 
-public class SnakeGame extends Game {
+public class SnakeApp extends Game {
 
     public ShapeRenderer shapeRenderer;
     public SpriteBatch batch;
