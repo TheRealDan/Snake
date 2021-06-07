@@ -84,6 +84,10 @@ public class Snake {
         return false;
     }
 
+    public int getLength() {
+        return snakeBodies.size();
+    }
+
     public SnakeBody getHead() {
         return snakeBodies.get(0);
     }

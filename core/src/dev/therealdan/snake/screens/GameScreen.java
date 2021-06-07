@@ -1,5 +1,6 @@
 package dev.therealdan.snake.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -40,6 +41,10 @@ public class GameScreen implements Screen {
             apple.render(app.shapeRenderer);
         instance.snake.render(app.shapeRenderer);
         app.shapeRenderer.end();
+
+        app.batch.begin();
+        app.font.draw(app.batch, "Score: " + instance.snake.getLength(), -(Gdx.graphics.getWidth() / 2f) + 25, Gdx.graphics.getHeight() / 2f - 25, 16);
+        app.batch.end();
 
         instance.loop(delta);
     }
