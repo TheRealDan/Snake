@@ -1,22 +1,21 @@
 package dev.therealdan.snake.main;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dev.therealdan.snake.screens.MainMenuScreen;
 
 public class SnakeGame extends Game {
 
-	public ShapeRenderer shapeRenderer;
+    public ShapeRenderer shapeRenderer;
     public SpriteBatch batch;
-    public BitmapFont font;
+    public FontManager font;
 
     @Override
     public void create() {
-    	shapeRenderer = new ShapeRenderer();
+        shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
-        font = new BitmapFont();
+        font = new FontManager();
 
         setScreen(new MainMenuScreen(this));
     }
@@ -28,7 +27,7 @@ public class SnakeGame extends Game {
 
     @Override
     public void dispose() {
-    	shapeRenderer.dispose();
+        shapeRenderer.dispose();
         batch.dispose();
         font.dispose();
     }
