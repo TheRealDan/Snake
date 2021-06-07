@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 
 import java.util.HashMap;
@@ -23,8 +24,11 @@ public class FontManager implements Disposable {
     }
 
     public void draw(SpriteBatch batch, String text, float x, float y, int fontSize) {
-        if (!fonts.containsKey(fontSize)) generateFont(fontSize);
-        fonts.get(fontSize).draw(batch, text, x, y);
+        getFont(fontSize).draw(batch, text, x, y);
+    }
+
+    public void center(SpriteBatch batch, String text, float x, float y, int fontSize) {
+        getFont(fontSize).draw(batch, text, x, y, 0, Align.center, false);
     }
 
     @Override
@@ -36,5 +40,10 @@ public class FontManager implements Disposable {
         FreeTypeFontGenerator.FreeTypeFontParameter freeTypeFontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         freeTypeFontParameter.size = fontSize;
         fonts.put(fontSize, freeTypeFontGenerator.generateFont(freeTypeFontParameter));
+    }
+
+    private BitmapFont getFont(int fontSize) {
+        if (!fonts.containsKey(fontSize)) generateFont(fontSize);
+        return fonts.get(fontSize);
     }
 }
