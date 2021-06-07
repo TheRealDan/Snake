@@ -53,7 +53,11 @@ public class Snake {
     }
 
     public void addBody() {
-        snakeBodies.add(new SnakeBody());
+        if (snakeBodies.size() > 0) {
+            snakeBodies.add(new SnakeBody(getTail().x, getTail().y));
+        } else {
+            snakeBodies.add(new SnakeBody(0, 0));
+        }
     }
 
     public boolean contains(Vector2 point) {
@@ -82,5 +86,9 @@ public class Snake {
 
     public SnakeBody getHead() {
         return snakeBodies.get(0);
+    }
+
+    public SnakeBody getTail() {
+        return snakeBodies.get(snakeBodies.size() - 1);
     }
 }
