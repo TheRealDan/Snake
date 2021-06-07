@@ -41,7 +41,7 @@ public class GameInstance {
     }
 
     private void handleAppleSpawning() {
-        if (System.currentTimeMillis() - lastAppleSpawn > appleSpawnInterval) return;
+        if (System.currentTimeMillis() - lastAppleSpawn < appleSpawnInterval) return;
         lastAppleSpawn = System.currentTimeMillis();
         apples.add(new Apple((random.nextBoolean() ? 1 : -1) * random.nextInt(Gdx.graphics.getWidth() / 2), (random.nextBoolean() ? 1 : -1) * random.nextInt(Gdx.graphics.getHeight() / 2)));
     }
