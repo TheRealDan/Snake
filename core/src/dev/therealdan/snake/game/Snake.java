@@ -16,6 +16,9 @@ public class Snake {
     private Color color;
     private List<SnakeBody> snakeBodies = new ArrayList<>();
 
+    private float xVelocity = 0;
+    private float yVelocity = 0;
+
     public Snake(Color color, int length) {
         this.color = color;
 
@@ -40,10 +43,34 @@ public class Snake {
     }
 
     public void handleMovementControls(float delta) {
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) getHead().y += 100 * delta;
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) getHead().y -= 100 * delta;
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) getHead().x -= 100 * delta;
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) getHead().x += 100 * delta;
+        float maxVelocity = 300;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            yVelocity += 1000 * delta;
+            if (yVelocity > maxVelocity) xVelocity += -xVelocity * delta;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            yVelocity -= 1000 * delta;
+            if (yVelocity < maxVelocity) xVelocity += -xVelocity * delta;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            xVelocity -= 1000 * delta;
+            if (xVelocity < maxVelocity) yVelocity += -yVelocity * delta;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            xVelocity += 1000 * delta;
+            if (xVelocity > maxVelocity) yVelocity += -yVelocity * delta;
+        }
+
+        if (xVelocity > maxVelocity) xVelocity = maxVelocity;
+        if (xVelocity < -maxVelocity) xVelocity = -maxVelocity;
+        if (yVelocity > maxVelocity) yVelocity = maxVelocity;
+        if (yVelocity < -maxVelocity) yVelocity = -maxVelocity;
+    }
+
+    public void handleMovement(float delta) {
+        getHead().x += xVelocity * delta;
+        getHead().y += yVelocity * delta;
     }
 
     public void handleWorldLooping(float worldWidth, float worldHeight) {
@@ -68,8 +95,8 @@ public class Snake {
             if (snakeBody.equals(head)) continue;
 
             if (!snakeBody.overlaps(toFollow)) {
-                snakeBody.x += (snakeBody.x > toFollow.x ? -1 : 1) * Math.abs(snakeBody.x - toFollow.x) * delta * 5;
-                snakeBody.y += (snakeBody.y > toFollow.y ? -1 : 1) * Math.abs(snakeBody.y - toFollow.y) * delta * 5;
+                snakeBody.x += (snakeBody.x > toFollow.x ? -1 : 1) * Math.abs(snakeBody.x - toFollow.x) * delta * 10;
+                snakeBody.y += (snakeBody.y > toFollow.y ? -1 : 1) * Math.abs(snakeBody.y - toFollow.y) * delta * 10;
             }
 
             toFollow = snakeBody;

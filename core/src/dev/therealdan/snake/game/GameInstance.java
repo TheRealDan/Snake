@@ -28,6 +28,7 @@ public class GameInstance {
 
     public void loop(float delta) {
         snake.handleMovementControls(delta);
+        snake.handleMovement(delta);
         snake.handleWorldLooping(worldWidth, worldHeight);
         snake.handleConnectedBody(delta);
 
