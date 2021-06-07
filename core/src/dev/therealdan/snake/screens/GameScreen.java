@@ -57,7 +57,7 @@ public class GameScreen implements Screen {
 
         if (System.currentTimeMillis() - lastAppleSpawn > appleSpawnInterval) {
             lastAppleSpawn = System.currentTimeMillis();
-            apples.add(new Apple(random.nextInt(100), random.nextInt(100)));
+            apples.add(new Apple((random.nextBoolean() ? 1 : -1) * random.nextInt(Gdx.graphics.getWidth() / 2), (random.nextBoolean() ? 1 : -1) * random.nextInt(Gdx.graphics.getHeight() / 2)));
         }
 
         for (Apple apple : apples) {
