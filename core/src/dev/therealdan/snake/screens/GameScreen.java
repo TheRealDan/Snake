@@ -25,7 +25,7 @@ public class GameScreen implements Screen {
     private List<Apple> apples = new ArrayList<>();
 
     private long lastAppleSpawn = System.currentTimeMillis();
-    private long applySpawnInterval = 2500;
+    private long appleSpawnInterval = 2500;
 
     public GameScreen(SnakeGame game) {
         this.game = game;
@@ -55,7 +55,7 @@ public class GameScreen implements Screen {
         snake.handleMovementControls(delta);
         snake.handleConnectedBody(delta);
 
-        if (System.currentTimeMillis() - lastAppleSpawn > applySpawnInterval) {
+        if (System.currentTimeMillis() - lastAppleSpawn > appleSpawnInterval) {
             lastAppleSpawn = System.currentTimeMillis();
             apples.add(new Apple(random.nextInt(100), random.nextInt(100)));
         }
