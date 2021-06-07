@@ -45,19 +45,19 @@ public class Snake {
     public void handleMovementControls(float delta) {
         float maxVelocity = 300;
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.W) && (yVelocity >= Math.abs(xVelocity) || Math.abs(xVelocity) > maxVelocity / 2f)) {
             yVelocity += 1000 * delta;
             if (yVelocity > maxVelocity) xVelocity += -xVelocity * delta;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.S) && (yVelocity <= Math.abs(xVelocity) || Math.abs(xVelocity) > maxVelocity / 2f)) {
             yVelocity -= 1000 * delta;
             if (yVelocity < maxVelocity) xVelocity += -xVelocity * delta;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A) && (xVelocity <= Math.abs(yVelocity) || Math.abs(yVelocity) > maxVelocity / 2f)) {
             xVelocity -= 1000 * delta;
             if (xVelocity < maxVelocity) yVelocity += -yVelocity * delta;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.D) && (xVelocity >= Math.abs(yVelocity) || Math.abs(yVelocity) > maxVelocity / 2f)) {
             xVelocity += 1000 * delta;
             if (xVelocity > maxVelocity) yVelocity += -yVelocity * delta;
         }
