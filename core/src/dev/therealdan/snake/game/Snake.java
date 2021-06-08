@@ -27,18 +27,18 @@ public class Snake {
     }
 
     public void render(ShapeRenderer shapeRenderer, float worldWidth, float worldHeight) {
-        shapeRenderer.setColor(color);
-        shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
+        boolean head = true;
         for (SnakeBody snakeBody : snakeBodies) {
-            shapeRenderer.circle(snakeBody.x, snakeBody.y, snakeBody.radius);
-            shapeRenderer.circle(snakeBody.x + worldWidth, snakeBody.y, snakeBody.radius);
-            shapeRenderer.circle(snakeBody.x - worldWidth, snakeBody.y, snakeBody.radius);
-            shapeRenderer.circle(snakeBody.x, snakeBody.y + worldHeight, snakeBody.radius);
-            shapeRenderer.circle(snakeBody.x, snakeBody.y - worldHeight, snakeBody.radius);
-            shapeRenderer.circle(snakeBody.x + worldWidth, snakeBody.y + worldHeight, snakeBody.radius);
-            shapeRenderer.circle(snakeBody.x - worldWidth, snakeBody.y - worldHeight, snakeBody.radius);
-            shapeRenderer.circle(snakeBody.x + worldWidth, snakeBody.y - worldHeight, snakeBody.radius);
-            shapeRenderer.circle(snakeBody.x - worldWidth, snakeBody.y + worldHeight, snakeBody.radius);
+            snakeBody.render(shapeRenderer, snakeBody.x, snakeBody.y, color, head);
+            snakeBody.render(shapeRenderer, snakeBody.x + worldWidth, snakeBody.y, color, head);
+            snakeBody.render(shapeRenderer, snakeBody.x - worldWidth, snakeBody.y, color, head);
+            snakeBody.render(shapeRenderer, snakeBody.x, snakeBody.y + worldHeight, color, head);
+            snakeBody.render(shapeRenderer, snakeBody.x, snakeBody.y - worldHeight, color, head);
+            snakeBody.render(shapeRenderer, snakeBody.x + worldWidth, snakeBody.y + worldHeight, color, head);
+            snakeBody.render(shapeRenderer, snakeBody.x - worldWidth, snakeBody.y - worldHeight, color, head);
+            snakeBody.render(shapeRenderer, snakeBody.x + worldWidth, snakeBody.y - worldHeight, color, head);
+            snakeBody.render(shapeRenderer, snakeBody.x - worldWidth, snakeBody.y + worldHeight, color, head);
+            head = false;
         }
     }
 
