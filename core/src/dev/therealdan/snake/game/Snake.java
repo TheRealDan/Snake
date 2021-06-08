@@ -126,6 +126,19 @@ public class Snake {
         }
     }
 
+    public boolean overlapsSelf() {
+        if (getLength() < 2) return false;
+
+        SnakeBody head = getHead();
+        SnakeBody neck = getNeck();
+        for (SnakeBody snakeBody : snakeBodies) {
+            if (snakeBody.equals(head) || snakeBody.equals(neck)) continue;
+            if (head.overlaps(snakeBody)) return true;
+        }
+
+        return false;
+    }
+
     public boolean contains(Vector2 point) {
         for (SnakeBody snakeBody : snakeBodies)
             if (snakeBody.contains(point))
@@ -156,6 +169,10 @@ public class Snake {
 
     public SnakeBody getHead() {
         return snakeBodies.get(0);
+    }
+
+    public SnakeBody getNeck() {
+        return snakeBodies.get(1);
     }
 
     public SnakeBody getTail() {

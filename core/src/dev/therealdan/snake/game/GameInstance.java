@@ -19,6 +19,7 @@ public class GameInstance {
 
     private long lastAppleSpawn = System.currentTimeMillis();
     private long appleSpawnInterval = 2500;
+    private boolean gameover = false;
 
     public GameInstance() {
         random = new Random();
@@ -27,10 +28,14 @@ public class GameInstance {
     }
 
     public void loop(float delta) {
+        if (gameover) return;
+
         snake.handleMovementControls(delta);
         snake.handleMovement(delta);
         snake.handleWorldLooping(worldWidth, worldHeight);
         snake.handleConnectedBody(delta);
+
+        if (snake.overlapsSelf()) gameover = true;
 
         handleConsumeApples();
         handleAppleSpawning();
