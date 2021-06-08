@@ -23,7 +23,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0, 0.15f, 0.2f, 1);
+        ScreenUtils.clear(app.color.getTheme().dark.cpy());
 
         camera.update();
         app.batch.setProjectionMatrix(camera.combined);
