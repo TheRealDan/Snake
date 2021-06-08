@@ -2,6 +2,7 @@ package dev.therealdan.snake.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -18,6 +19,9 @@ public class GameScreen implements Screen {
 
     private GameInstance instance;
 
+    private Color background;
+    private long backgroundColorInterval = 10000;
+
     public GameScreen(SnakeApp app) {
         this.app = app;
 
@@ -25,11 +29,14 @@ public class GameScreen implements Screen {
         viewport = new ScreenViewport(camera);
 
         instance = new GameInstance(app.sound);
+
+        background = app.color.getTheme().dark.cpy();
     }
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0, 0, 0.2f, 1);
+        ScreenUtils.clear(background);
+        background.lerp(System.currentTimeMillis() % backgroundColorInterval > backgroundColorInterval / 2 ? app.color.getTheme().light : app.color.getTheme().dark, 0.005f);
 
         camera.update();
         app.shapeRenderer.setProjectionMatrix(camera.combined);
