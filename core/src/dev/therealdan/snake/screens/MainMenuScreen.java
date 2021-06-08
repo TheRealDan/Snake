@@ -29,6 +29,7 @@ public class MainMenuScreen implements Screen {
         app.batch.setProjectionMatrix(camera.combined);
 
         app.batch.begin();
+        app.batch.setColor(app.color.getTheme().text);
         app.font.center(app.batch, "Click to Start", 0, 0, 16);
         app.batch.end();
 
