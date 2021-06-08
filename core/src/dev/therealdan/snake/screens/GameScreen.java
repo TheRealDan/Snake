@@ -50,6 +50,7 @@ public class GameScreen implements Screen {
         app.shapeRenderer.end();
 
         app.batch.begin();
+        app.batch.setColor(app.color.getTheme().text);
         if (!instance.gameover) {
             app.font.draw(app.batch, "Score: " + instance.getScore(), -(Gdx.graphics.getWidth() / 2f) + 25, Gdx.graphics.getHeight() / 2f - 25, 16);
         } else {
