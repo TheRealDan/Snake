@@ -24,7 +24,7 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera();
         viewport = new ScreenViewport(camera);
 
-        instance = new GameInstance();
+        instance = new GameInstance(app.sound);
     }
 
     @Override

@@ -73,19 +73,27 @@ public class Snake {
         getHead().y += yVelocity * delta;
     }
 
-    public void handleWorldLooping(float worldWidth, float worldHeight) {
+    public boolean handleWorldLooping(float worldWidth, float worldHeight) {
+        boolean didTeleport = false;
+
         SnakeBody head = getHead();
         if (head.x > worldWidth / 2f) {
             teleport(head.x - worldWidth, head.y);
+            didTeleport = true;
         } else if (head.x < -(worldWidth / 2f)) {
             teleport(head.x + worldWidth, head.y);
+            didTeleport = true;
         }
 
         if (head.y > worldHeight / 2f) {
             teleport(head.x, head.y - worldHeight);
+            didTeleport = true;
         } else if (head.y < -(worldHeight / 2f)) {
             teleport(head.x, head.y + worldHeight);
+            didTeleport = true;
         }
+
+        return didTeleport;
     }
 
     public void handleConnectedBody(float delta) {

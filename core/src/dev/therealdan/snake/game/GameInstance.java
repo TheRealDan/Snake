@@ -2,6 +2,7 @@ package dev.therealdan.snake.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import dev.therealdan.snake.main.SoundManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Random;
 public class GameInstance {
 
     private Random random;
+    private SoundManager sound;
 
     public Snake snake;
     public List<Apple> apples = new ArrayList<>();
@@ -21,8 +23,9 @@ public class GameInstance {
     private long appleSpawnInterval = 2500;
     public boolean gameover = false;
 
-    public GameInstance() {
+    public GameInstance(SoundManager sound) {
         random = new Random();
+        this.sound = sound;
 
         snake = new Snake(Color.GREEN, 4);
     }
@@ -32,10 +35,13 @@ public class GameInstance {
 
         snake.handleMovementControls(delta);
         snake.handleMovement(delta);
-        snake.handleWorldLooping(worldWidth, worldHeight);
+        if (snake.handleWorldLooping(worldWidth, worldHeight)) sound.worldloop.play();
         snake.handleConnectedBody(delta);
 
-        if (snake.overlapsSelf()) gameover = true;
+        if (snake.overlapsSelf()) {
+            gameover = true;
+            sound.gameover.play();
+        }
 
         handleConsumeApples();
         handleAppleSpawning();
@@ -51,6 +57,7 @@ public class GameInstance {
             if (snake.overlaps(apple)) {
                 apples.remove(apple);
                 snake.addBody();
+                sound.consumeapple.play();
             }
         }
     }

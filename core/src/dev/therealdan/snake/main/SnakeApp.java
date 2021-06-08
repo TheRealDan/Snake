@@ -10,12 +10,14 @@ public class SnakeApp extends Game {
     public ShapeRenderer shapeRenderer;
     public SpriteBatch batch;
     public FontManager font;
+    public SoundManager sound;
 
     @Override
     public void create() {
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
         font = new FontManager();
+        sound = new SoundManager();
 
         setScreen(new MainMenuScreen(this));
     }
