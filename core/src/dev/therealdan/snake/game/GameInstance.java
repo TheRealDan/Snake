@@ -19,7 +19,7 @@ public class GameInstance {
 
     private long lastAppleSpawn = System.currentTimeMillis();
     private long appleSpawnInterval = 2500;
-    private boolean gameover = false;
+    public boolean gameover = false;
 
     public GameInstance() {
         random = new Random();
@@ -59,5 +59,9 @@ public class GameInstance {
         if (System.currentTimeMillis() - lastAppleSpawn < appleSpawnInterval) return;
         lastAppleSpawn = System.currentTimeMillis();
         apples.add(new Apple((random.nextBoolean() ? 1 : -1) * random.nextInt(Gdx.graphics.getWidth() / 2), (random.nextBoolean() ? 1 : -1) * random.nextInt(Gdx.graphics.getHeight() / 2)));
+    }
+
+    public int getScore() {
+        return snake.getLength();
     }
 }

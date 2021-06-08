@@ -43,7 +43,12 @@ public class GameScreen implements Screen {
         app.shapeRenderer.end();
 
         app.batch.begin();
-        app.font.draw(app.batch, "Score: " + instance.snake.getLength(), -(Gdx.graphics.getWidth() / 2f) + 25, Gdx.graphics.getHeight() / 2f - 25, 16);
+        if (!instance.gameover) {
+            app.font.draw(app.batch, "Score: " + instance.getScore(), -(Gdx.graphics.getWidth() / 2f) + 25, Gdx.graphics.getHeight() / 2f - 25, 16);
+        } else {
+            app.font.center(app.batch, "Game Over!", 0, 50, 32);
+            app.font.center(app.batch, "Your Score: " + instance.getScore(), 0, 0, 24);
+        }
         app.batch.end();
 
         instance.loop(delta);
