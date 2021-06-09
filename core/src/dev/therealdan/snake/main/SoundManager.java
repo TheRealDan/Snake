@@ -19,6 +19,20 @@ public class SoundManager {
         volume = 1;
     }
 
+    public void changeVolume() {
+        if (getVolume() >= 1f) {
+            setVolume(0.75f);
+        } else if (getVolume() >= 0.75f) {
+            setVolume(0.5f);
+        } else if (getVolume() >= 0.5f) {
+            setVolume(0.25f);
+        } else if (getVolume() >= 0.25f) {
+            setVolume(0f);
+        } else {
+            setVolume(1f);
+        }
+    }
+
     public void setVolume(float volume) {
         this.volume = volume;
     }

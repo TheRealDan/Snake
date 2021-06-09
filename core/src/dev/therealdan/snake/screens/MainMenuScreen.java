@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import dev.therealdan.snake.game.Apple;
@@ -17,6 +19,8 @@ public class MainMenuScreen implements Screen {
     private ScreenViewport viewport;
     private OrthographicCamera camera;
 
+    private Rectangle volumeButton;
+
     private Snake snake;
     private Apple apple;
 
@@ -25,6 +29,8 @@ public class MainMenuScreen implements Screen {
 
         camera = new OrthographicCamera();
         viewport = new ScreenViewport(camera);
+
+        volumeButton = new Rectangle(0, 0, 25, 25);
 
         snake.setLength(6);
         this.snake = snake;
@@ -39,10 +45,13 @@ public class MainMenuScreen implements Screen {
         app.shapeRenderer.setProjectionMatrix(camera.combined);
         app.batch.setProjectionMatrix(camera.combined);
 
+        volumeButton.setPosition(Gdx.graphics.getWidth() / 2f - volumeButton.width, Gdx.graphics.getHeight() / 2f - volumeButton.height);
+
         app.shapeRenderer.setAutoShapeType(true);
         app.shapeRenderer.begin();
         snake.render(app.shapeRenderer, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         apple.render(app.shapeRenderer);
+        app.shapeRenderer.rect(volumeButton.x, volumeButton.y, volumeButton.width, volumeButton.height);
         app.shapeRenderer.end();
 
         app.batch.begin();
@@ -69,6 +78,13 @@ public class MainMenuScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             app.setScreen(new GameScreen(app, snake));
             dispose();
+        } else if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+            Vector3 position = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+            camera.unproject(position);
+            if (volumeButton.contains(position.x, position.y)) {
+                app.sound.playConsumeApple();
+                app.sound.changeVolume();
+            }
         }
     }
 
