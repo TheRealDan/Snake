@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import dev.therealdan.snake.game.Apple;
 import dev.therealdan.snake.game.GameInstance;
+import dev.therealdan.snake.game.Snake;
 import dev.therealdan.snake.main.SnakeApp;
 
 public class GameScreen implements Screen {
@@ -22,13 +23,13 @@ public class GameScreen implements Screen {
     private Color background;
     private long backgroundColorInterval = 10000;
 
-    public GameScreen(SnakeApp app) {
+    public GameScreen(SnakeApp app, Snake snake) {
         this.app = app;
 
         camera = new OrthographicCamera();
         viewport = new ScreenViewport(camera);
 
-        instance = new GameInstance(app.sound);
+        instance = new GameInstance(app.sound, snake);
 
         background = app.color.getTheme().dark.cpy();
     }

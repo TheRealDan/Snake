@@ -27,7 +27,7 @@ public class MainMenuScreen implements Screen {
         camera = new OrthographicCamera();
         viewport = new ScreenViewport(camera);
 
-        snake = new Snake(Color.GREEN, 6);
+        snake = new Snake(Color.GREEN, 0, 165, 6);
         apple = new Apple(0, 0);
     }
 
@@ -65,7 +65,7 @@ public class MainMenuScreen implements Screen {
         if (snake.getHead().y < 165) snake.getHead().y++;
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            app.setScreen(new GameScreen(app));
+            app.setScreen(new GameScreen(app, snake));
             dispose();
         }
     }

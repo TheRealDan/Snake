@@ -1,7 +1,6 @@
 package dev.therealdan.snake.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import dev.therealdan.snake.main.SoundManager;
 
 import java.util.ArrayList;
@@ -23,11 +22,12 @@ public class GameInstance {
     private long appleSpawnInterval = 2500;
     public boolean gameover = false;
 
-    public GameInstance(SoundManager sound) {
+    public GameInstance(SoundManager sound, Snake snake) {
         random = new Random();
         this.sound = sound;
 
-        snake = new Snake(Color.GREEN, 4);
+        this.snake = snake;
+        snake.trim(2);
     }
 
     public void loop(float delta) {

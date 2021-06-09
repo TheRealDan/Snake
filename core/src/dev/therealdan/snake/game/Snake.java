@@ -19,11 +19,11 @@ public class Snake {
     private float xVelocity = 150;
     private float yVelocity = 0;
 
-    public Snake(Color color, int length) {
+    public Snake(Color color, float x, float y, int length) {
         this.color = color;
 
         for (int i = 0; i < length; i++)
-            addBody();
+            addBody(x, y);
     }
 
     public void render(ShapeRenderer shapeRenderer, float worldWidth, float worldHeight) {
@@ -127,11 +127,16 @@ public class Snake {
     }
 
     public void addBody() {
-        if (snakeBodies.size() > 0) {
-            snakeBodies.add(new SnakeBody(getTail().x, getTail().y));
-        } else {
-            snakeBodies.add(new SnakeBody(0, 0));
-        }
+        snakeBodies.add(new SnakeBody(getTail().x, getTail().y));
+    }
+
+    public void addBody(float x, float y) {
+        snakeBodies.add(new SnakeBody(x, y));
+    }
+
+    public void trim(int amount) {
+        for (int i = 0; i < amount; i++)
+            snakeBodies.remove(getLength() - 1);
     }
 
     public boolean overlapsSelf() {
