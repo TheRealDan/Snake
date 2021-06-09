@@ -20,16 +20,16 @@ public class SoundManager {
     }
 
     public void changeVolume() {
-        if (getVolume() >= 1f) {
-            setVolume(0.75f);
-        } else if (getVolume() >= 0.75f) {
-            setVolume(0.5f);
-        } else if (getVolume() >= 0.5f) {
+        if (getVolume() >= 0.6f) {
+            setVolume(0.4f);
+        } else if (getVolume() >= 0.4f) {
             setVolume(0.25f);
         } else if (getVolume() >= 0.25f) {
+            setVolume(0.1f);
+        } else if (getVolume() >= 0.1f) {
             setVolume(0f);
         } else {
-            setVolume(1f);
+            setVolume(0.6f);
         }
     }
 
