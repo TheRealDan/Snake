@@ -63,6 +63,8 @@ public class MainMenuScreen implements Screen {
 
         if (snake.getHead().y > 165) snake.getHead().y--;
         if (snake.getHead().y < 165) snake.getHead().y++;
+        if (snake.yVelocity > 0) snake.yVelocity--;
+        if (snake.yVelocity < 0) snake.yVelocity++;
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             app.setScreen(new GameScreen(app, snake));

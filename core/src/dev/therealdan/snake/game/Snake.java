@@ -16,8 +16,8 @@ public class Snake {
     private Color color;
     private List<SnakeBody> snakeBodies = new ArrayList<>();
 
-    private float xVelocity = 150;
-    private float yVelocity = 0;
+    public float xVelocity = 150;
+    public float yVelocity = 0;
 
     public Snake(Color color, float x, float y, int length) {
         this.color = color;
