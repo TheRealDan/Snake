@@ -23,7 +23,7 @@ public class MainMenuScreen implements Screen {
     private Rectangle darkModeButton;
     private Texture lightningWhite, lightningBlack;
     private Rectangle volumeButton;
-    private Texture speakerBlack, speakerWhite;
+    private Texture speakerBlack, speakerWhite, muteBlack, muteWhite;
 
     private Snake snake;
     private Apple apple;
@@ -41,6 +41,8 @@ public class MainMenuScreen implements Screen {
         darkModeButton = new Rectangle(0, 0, 35, 35);
         lightningWhite = new Texture("icons/lightning-white.png");
         lightningBlack = new Texture("icons/lightning-black.png");
+        muteBlack = new Texture("icons/mute-black.png");
+        muteWhite = new Texture("icons/mute-white.png");
 
         snake.setLength(6);
         this.snake = snake;
@@ -66,7 +68,7 @@ public class MainMenuScreen implements Screen {
 
         app.batch.begin();
         app.batch.draw(app.color.isDarkTheme() ? lightningWhite : lightningBlack, darkModeButton.x, darkModeButton.y, darkModeButton.width, darkModeButton.height);
-        app.batch.draw(app.color.isDarkTheme() ? speakerWhite : speakerBlack, volumeButton.x, volumeButton.y, volumeButton.width, volumeButton.height);
+        app.batch.draw(app.color.isDarkTheme() ? app.sound.isMuted() ? muteWhite : speakerWhite : app.sound.isMuted() ? muteBlack : speakerBlack, volumeButton.x, volumeButton.y, volumeButton.width, volumeButton.height);
         app.batch.setColor(app.color.getTheme().text);
         app.font.center(app.batch, "Use WASD to move", 0, 200, 16);
         app.font.center(app.batch, "You can use the screen's edges to loop around", 0, 140, 16);

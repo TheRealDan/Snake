@@ -41,6 +41,10 @@ public class SoundManager {
         return volume;
     }
 
+    public boolean isMuted() {
+        return getVolume() == 0f;
+    }
+
     public void playConsumeApple() {
         consumeapple.play(volume);
     }
