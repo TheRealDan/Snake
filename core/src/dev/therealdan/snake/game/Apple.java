@@ -32,4 +32,9 @@ public class Apple extends Circle {
         shapeRenderer.setColor(green);
         shapeRenderer.ellipse(x, y + radius - 1, radius, radius / 2f);
     }
+
+    public void teleport(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
 }
