@@ -34,12 +34,12 @@ public class GameInstance {
 
         snake.handleMovementControls(delta);
         snake.handleMovement(delta);
-        if (snake.handleWorldLooping(worldWidth, worldHeight)) sound.worldloop.play();
+        if (snake.handleWorldLooping(worldWidth, worldHeight)) sound.playWorldLoop();
         snake.handleConnectedBody(delta);
 
         if (snake.overlapsSelf()) {
             gameover = true;
-            sound.gameover.play();
+            sound.playGameOver();
         }
 
         handleConsumeApples();
@@ -56,7 +56,7 @@ public class GameInstance {
             if (snake.overlaps(apple)) {
                 apples.remove(apple);
                 snake.addBody();
-                sound.consumeapple.play();
+                sound.playConsumeApple();
             }
         }
     }
