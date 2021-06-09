@@ -99,8 +99,8 @@ public class MainMenuScreen implements Screen {
                 app.sound.playConsumeApple();
                 app.color.switchTheme();
             } else if (volumeButton.contains(position.x, position.y)) {
-                app.sound.playConsumeApple();
                 app.sound.changeVolume();
+                app.sound.playConsumeApple();
             }
         }
     }
