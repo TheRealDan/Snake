@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -19,7 +20,10 @@ public class MainMenuScreen implements Screen {
     private ScreenViewport viewport;
     private OrthographicCamera camera;
 
+    private Rectangle darkModeButton;
+    private Texture lightningWhite, lightningBlack;
     private Rectangle volumeButton;
+    private Texture speakerBlack, speakerWhite;
 
     private Snake snake;
     private Apple apple;
@@ -30,7 +34,13 @@ public class MainMenuScreen implements Screen {
         camera = new OrthographicCamera();
         viewport = new ScreenViewport(camera);
 
-        volumeButton = new Rectangle(0, 0, 25, 25);
+        volumeButton = new Rectangle(0, 0, 35, 35);
+        speakerBlack = new Texture("icons/speaker-black.png");
+        speakerWhite = new Texture("icons/speaker-white.png");
+
+        darkModeButton = new Rectangle(0, 0, 35, 35);
+        lightningWhite = new Texture("icons/lightning-white.png");
+        lightningBlack = new Texture("icons/lightning-black.png");
 
         snake.setLength(6);
         this.snake = snake;
@@ -45,16 +55,18 @@ public class MainMenuScreen implements Screen {
         app.shapeRenderer.setProjectionMatrix(camera.combined);
         app.batch.setProjectionMatrix(camera.combined);
 
+        darkModeButton.setPosition(-(Gdx.graphics.getWidth() / 2f), Gdx.graphics.getHeight() / 2f - volumeButton.height);
         volumeButton.setPosition(Gdx.graphics.getWidth() / 2f - volumeButton.width, Gdx.graphics.getHeight() / 2f - volumeButton.height);
 
         app.shapeRenderer.setAutoShapeType(true);
         app.shapeRenderer.begin();
         snake.render(app.shapeRenderer, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         apple.render(app.shapeRenderer);
-        app.shapeRenderer.rect(volumeButton.x, volumeButton.y, volumeButton.width, volumeButton.height);
         app.shapeRenderer.end();
 
         app.batch.begin();
+        app.batch.draw(app.color.isDarkTheme() ? lightningWhite : lightningBlack, darkModeButton.x, darkModeButton.y, darkModeButton.width, darkModeButton.height);
+        app.batch.draw(app.color.isDarkTheme() ? speakerWhite : speakerBlack, volumeButton.x, volumeButton.y, volumeButton.width, volumeButton.height);
         app.batch.setColor(app.color.getTheme().text);
         app.font.center(app.batch, "Use WASD to move", 0, 200, 16);
         app.font.center(app.batch, "You can use the screen's edges to loop around", 0, 140, 16);
@@ -81,7 +93,10 @@ public class MainMenuScreen implements Screen {
         } else if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
             Vector3 position = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(position);
-            if (volumeButton.contains(position.x, position.y)) {
+            if (darkModeButton.contains(position.x, position.y)) {
+                app.sound.playConsumeApple();
+                app.color.switchTheme();
+            } else if (volumeButton.contains(position.x, position.y)) {
                 app.sound.playConsumeApple();
                 app.sound.changeVolume();
             }
