@@ -1,6 +1,7 @@
 package dev.therealdan.snake.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -29,6 +30,7 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera();
         viewport = new ScreenViewport(camera);
 
+        snake.setLength(6);
         instance = new GameInstance(app.sound, snake);
 
         background = app.color.getTheme().dark.cpy();
@@ -61,6 +63,11 @@ public class GameScreen implements Screen {
         app.batch.end();
 
         instance.loop(delta);
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            app.setScreen(new MainMenuScreen(app, instance.snake));
+            dispose();
+        }
     }
 
     @Override

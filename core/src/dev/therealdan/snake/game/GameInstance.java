@@ -27,7 +27,6 @@ public class GameInstance {
         this.sound = sound;
 
         this.snake = snake;
-        snake.trim(2);
     }
 
     public void loop(float delta) {

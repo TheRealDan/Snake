@@ -3,7 +3,6 @@ package dev.therealdan.snake.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -21,13 +20,14 @@ public class MainMenuScreen implements Screen {
     private Snake snake;
     private Apple apple;
 
-    public MainMenuScreen(final SnakeApp app) {
+    public MainMenuScreen(final SnakeApp app, Snake snake) {
         this.app = app;
 
         camera = new OrthographicCamera();
         viewport = new ScreenViewport(camera);
 
-        snake = new Snake(Color.GREEN, 0, 165, 6);
+        snake.setLength(6);
+        this.snake = snake;
         apple = new Apple(0, 0);
     }
 

@@ -22,8 +22,8 @@ public class Snake {
     public Snake(Color color, float x, float y, int length) {
         this.color = color;
 
-        for (int i = 0; i < length; i++)
-            addBody(x, y);
+        addBody(x, y);
+        setLength(length);
     }
 
     public void render(ShapeRenderer shapeRenderer, float worldWidth, float worldHeight) {
@@ -137,6 +137,15 @@ public class Snake {
     public void trim(int amount) {
         for (int i = 0; i < amount; i++)
             snakeBodies.remove(getLength() - 1);
+    }
+
+    public void setLength(int length) {
+        if (getLength() > length) {
+            trim(getLength() - length);
+        } else if (getLength() < length) {
+            for (int i = 0; i <= length - getLength(); i++)
+                addBody();
+        }
     }
 
     public boolean overlapsSelf() {

@@ -1,8 +1,10 @@
 package dev.therealdan.snake.main;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import dev.therealdan.snake.game.Snake;
 import dev.therealdan.snake.screens.MainMenuScreen;
 
 public class SnakeApp extends Game {
@@ -21,7 +23,7 @@ public class SnakeApp extends Game {
         sound = new SoundManager();
         color = new ColorManager();
 
-        setScreen(new MainMenuScreen(this));
+        setScreen(new MainMenuScreen(this, new Snake(Color.GREEN, 0, 165, 6)));
     }
 
     @Override
