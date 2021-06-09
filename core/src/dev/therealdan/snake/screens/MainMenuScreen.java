@@ -56,7 +56,7 @@ public class MainMenuScreen implements Screen {
         app.batch.end();
 
         snake.handleMovement(delta);
-        snake.handleWorldLooping(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        if (snake.handleWorldLooping(Gdx.graphics.getWidth(), Gdx.graphics.getHeight())) app.sound.worldloop.play();
         snake.handleConnectedBody(delta);
 
         apple.teleport(130, 43);
