@@ -21,6 +21,7 @@ public class GameInstance {
     private long lastAppleSpawn = System.currentTimeMillis();
     private long appleSpawnInterval = 2500;
     public boolean gameover = false;
+    public long gameoverAt = System.currentTimeMillis();
 
     private long slowMotionActivated = 0;
     private long slowMotionTransition = 1000;
@@ -45,6 +46,7 @@ public class GameInstance {
 
         if (snake.overlapsSelf(worldWidth, worldHeight)) {
             gameover = true;
+            gameoverAt = System.currentTimeMillis();
             sound.playGameOver();
         }
 
