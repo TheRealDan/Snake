@@ -29,12 +29,8 @@ public class Snake {
         float x, y;
         boolean head = true;
         for (SnakeBody snakeBody : snakeBodies) {
-            x = snakeBody.x;
-            y = snakeBody.y;
-            while (x < -(worldWidth / 2f)) x += worldWidth;
-            while (y < -(worldHeight / 2f)) y += worldHeight;
-            while (x > worldWidth / 2f) x -= worldWidth;
-            while (y > worldHeight / 2f) y -= worldHeight;
+            x = snakeBody.getBoundX(worldWidth);
+            y = snakeBody.getBoundY(worldHeight);
 
             snakeBody.render(shapeRenderer, x, y, color, head);
             if (snakeBody.nearBorderOf(-(worldWidth / 2f), -(worldHeight / 2f), worldWidth, worldHeight)) {
@@ -157,19 +153,12 @@ public class Snake {
     public boolean overlapsSelf(float worldWidth, float worldHeight) {
         if (getLength() < 2) return false;
 
-        float x, y;
         SnakeBody head = getHead();
         SnakeBody neck = getNeck();
         for (SnakeBody snakeBody : snakeBodies) {
             if (snakeBody.equals(head) || snakeBody.equals(neck)) continue;
             if (head.overlaps(snakeBody)) return true;
-            x = snakeBody.x;
-            y = snakeBody.y;
-            while (x < -(worldWidth / 2f)) x += worldWidth;
-            while (y < -(worldHeight / 2f)) y += worldHeight;
-            while (x > worldWidth / 2f) x -= worldWidth;
-            while (y > worldHeight / 2f) y -= worldHeight;
-            if (head.contains(x, y)) return true;
+            if (head.contains(snakeBody.getBoundX(worldWidth), snakeBody.getBoundY(worldHeight))) return true;
         }
 
         return false;
