@@ -2,6 +2,7 @@ package dev.therealdan.snake.main.scoreapi;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.net.HttpRequestBuilder;
 import com.badlogic.gdx.net.HttpRequestHeader;
 import com.badlogic.gdx.utils.Json;
@@ -20,13 +21,13 @@ public class ScoreAPI implements Net.HttpResponseListener {
 
     private List<Score> scores = new ArrayList<>();
 
-    public ScoreAPI() {
+    public ScoreAPI(Preferences preferences) {
         json = new Json();
         json.setIgnoreUnknownFields(true);
 
-        scoreboard = "snake";
-        publicKey = "plawokes";
-        endpoint = "https://therealdan.dev/umbraco/surface/score";
+        scoreboard = preferences.getString("ScoreAPI.Scoreboard", "snake");
+        publicKey = preferences.getString("ScoreAPI.PublicKey", "plawokes");
+        endpoint = preferences.getString("ScoreAPI.PrivateKay", "https://therealdan.dev/umbraco/surface/score");
     }
 
     public void retrieveScores() {
