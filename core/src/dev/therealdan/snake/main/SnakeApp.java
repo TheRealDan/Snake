@@ -28,7 +28,7 @@ public class SnakeApp extends Game {
         scoreAPI = new ScoreAPI(preferences);
         font = new FontManager();
         sound = new SoundManager();
-        color = new ColorManager();
+        color = new ColorManager(preferences);
 
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
@@ -52,6 +52,7 @@ public class SnakeApp extends Game {
         batch.dispose();
 
         preferences.putString("Username", username);
+        preferences.putBoolean("UseDarkTheme", color.isDarkTheme());
         preferences.flush();
     }
 

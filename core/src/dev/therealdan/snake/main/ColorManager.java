@@ -1,5 +1,6 @@
 package dev.therealdan.snake.main;
 
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 
 public class ColorManager {
@@ -7,9 +8,9 @@ public class ColorManager {
     private ColorTheme lightTheme;
     private ColorTheme darkTheme;
 
-    private boolean useDark = false;
+    private boolean useDarkTheme;
 
-    public ColorManager() {
+    public ColorManager(Preferences preferences) {
         lightTheme = new ColorTheme(
                 new Color(0.14509805f, 0.49411765f, 0.5019608f, 1),
                 new Color(0.05882353f, 0.44313726f, 0.4509804f, 1),
@@ -23,25 +24,27 @@ public class ColorManager {
                 new Color(0.73333335f, 0.78431374f, 0.7921569f, 1),
                 Color.BLACK
         );
+
+        this.useDarkTheme = preferences.getBoolean("UseDarkTheme", false);
     }
 
     public void switchTheme() {
-        useDark = !useDark;
+        useDarkTheme = !useDarkTheme;
     }
 
     public void useLightTheme() {
-        useDark = false;
+        useDarkTheme = false;
     }
 
     public void useDarkTheme() {
-        useDark = true;
+        useDarkTheme = true;
     }
 
     public boolean isDarkTheme() {
-        return useDark;
+        return useDarkTheme;
     }
 
     public ColorTheme getTheme() {
-        return useDark ? darkTheme : lightTheme;
+        return useDarkTheme ? darkTheme : lightTheme;
     }
 }
