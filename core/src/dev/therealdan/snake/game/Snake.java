@@ -99,6 +99,8 @@ public class Snake {
     }
 
     public void handleConnectedBody(float delta) {
+        if (delta > 0.01f) return;
+
         SnakeBody head = getHead();
         SnakeBody toFollow = head;
         for (SnakeBody snakeBody : snakeBodies) {
