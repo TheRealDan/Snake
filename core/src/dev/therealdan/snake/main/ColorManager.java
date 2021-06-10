@@ -15,7 +15,7 @@ public class ColorManager {
                 new Color(0.14509805f, 0.49411765f, 0.5019608f, 1),
                 new Color(0.05882353f, 0.44313726f, 0.4509804f, 1),
                 new Color(0.73333335f, 0.78431374f, 0.7921569f, 1),
-                new Color(0.11725491f, 0.1564706f, 0.18784314f, 1),
+                new Color(0.14509805f, 0.49411765f, 0.5019608f, 1),
                 Color.BLACK
         );
 
