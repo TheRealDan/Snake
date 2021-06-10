@@ -48,11 +48,11 @@ public class SoundManager {
     }
 
     public void playConsumeApple() {
-        consumeapple.play(volume);
+        consumeapple.play(volume * 0.7f);
     }
 
     public void playWorldLoop() {
-        worldloop.play(volume);
+        worldloop.play(volume * 0.5f);
     }
 
     public void playSlowMotion() {
