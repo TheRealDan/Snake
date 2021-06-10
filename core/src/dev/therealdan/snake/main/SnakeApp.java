@@ -36,7 +36,7 @@ public class SnakeApp extends Game {
 
         username = preferences.getString("Username", "");
 
-        setScreen(new MainMenuScreen(this, new Snake(Color.GREEN, 0, 165, 6)));
+        setScreen(new MainMenuScreen(this, new Snake(new Color(0.01f, 0.67f, 0.21f, 1), 0, 165, 6)));
     }
 
     @Override
