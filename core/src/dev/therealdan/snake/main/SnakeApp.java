@@ -3,7 +3,6 @@ package dev.therealdan.snake.main;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dev.therealdan.snake.game.Snake;
@@ -36,7 +35,7 @@ public class SnakeApp extends Game {
 
         username = preferences.getString("Username", "");
 
-        setScreen(new MainMenuScreen(this, new Snake(new Color(0.01f, 0.67f, 0.21f, 1), 0, 165, 6)));
+        setScreen(new MainMenuScreen(this, new Snake(0, 165, 6)));
     }
 
     @Override

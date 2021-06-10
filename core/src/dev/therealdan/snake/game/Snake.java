@@ -18,8 +18,8 @@ public class Snake {
     public float xVelocity = 150;
     public float yVelocity = 0;
 
-    public Snake(Color color, float x, float y, int length) {
-        this.color = color;
+    public Snake(float x, float y, int length) {
+        this.color = new Color(0.01f, 0.67f, 0.21f, 1);
 
         addBody(x, y);
         setLength(length);
