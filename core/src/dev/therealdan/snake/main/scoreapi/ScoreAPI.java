@@ -27,7 +27,7 @@ public class ScoreAPI implements Net.HttpResponseListener {
 
         scoreboard = preferences.getString("ScoreAPI.Scoreboard", "snake");
         publicKey = preferences.getString("ScoreAPI.PublicKey", "plawokes");
-        endpoint = preferences.getString("ScoreAPI.PrivateKay", "https://therealdan.dev/umbraco/surface/score");
+        endpoint = preferences.getString("ScoreAPI.PrivateKey", "https://therealdan.dev/umbraco/surface/score");
     }
 
     public void retrieveScores() {
