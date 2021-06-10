@@ -1,6 +1,7 @@
 package dev.therealdan.snake.main;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -13,13 +14,13 @@ public class SoundManager implements Disposable {
 
     private float volume;
 
-    public SoundManager() {
+    public SoundManager(Preferences preferences) {
         consumeapple = Gdx.audio.newSound(Gdx.files.internal("sounds/consumeapple.wav"));
         gameover = Gdx.audio.newSound(Gdx.files.internal("sounds/gameover.wav"));
         slowmotion = Gdx.audio.newSound(Gdx.files.internal("sounds/slowmotion.wav"));
         worldloop = Gdx.audio.newSound(Gdx.files.internal("sounds/worldloop.wav"));
 
-        volume = 1;
+        volume = preferences.getFloat("Volume", 1f);
     }
 
     public void changeVolume() {

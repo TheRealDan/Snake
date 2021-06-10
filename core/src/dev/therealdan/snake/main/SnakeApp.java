@@ -27,7 +27,7 @@ public class SnakeApp extends Game {
         preferences = Gdx.app.getPreferences("snake");
         scoreAPI = new ScoreAPI(preferences);
         font = new FontManager();
-        sound = new SoundManager();
+        sound = new SoundManager(preferences);
         color = new ColorManager(preferences);
 
         shapeRenderer = new ShapeRenderer();
@@ -53,6 +53,7 @@ public class SnakeApp extends Game {
 
         preferences.putString("Username", username);
         preferences.putBoolean("UseDarkTheme", color.isDarkTheme());
+        preferences.putFloat("Volume", sound.getVolume());
         preferences.flush();
     }
 
