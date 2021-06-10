@@ -17,6 +17,8 @@ public class SnakeApp extends Game {
     public ColorManager color;
     public ScoreAPI scoreAPI;
 
+    public String name = "";
+
     @Override
     public void create() {
         shapeRenderer = new ShapeRenderer();
