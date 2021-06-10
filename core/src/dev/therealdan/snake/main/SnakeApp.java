@@ -46,9 +46,11 @@ public class SnakeApp extends Game {
 
     @Override
     public void dispose() {
+        font.dispose();
+        sound.dispose();
+
         shapeRenderer.dispose();
         batch.dispose();
-        font.dispose();
     }
 
     @Override

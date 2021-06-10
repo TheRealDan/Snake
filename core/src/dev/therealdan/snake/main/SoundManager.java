@@ -2,8 +2,9 @@ package dev.therealdan.snake.main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.utils.Disposable;
 
-public class SoundManager {
+public class SoundManager implements Disposable {
 
     private Sound consumeapple;
     private Sound gameover;
@@ -61,5 +62,13 @@ public class SoundManager {
 
     public void playGameOver() {
         gameover.play(volume);
+    }
+
+    @Override
+    public void dispose() {
+        consumeapple.dispose();
+        gameover.dispose();
+        slowmotion.dispose();
+        worldloop.dispose();
     }
 }
