@@ -77,9 +77,10 @@ public class GameInstance {
         return snake.getLength();
     }
 
-    public void activateSlowMotion() {
-        if (System.currentTimeMillis() - slowMotionActivated < slowMotionDuration) return;
+    public boolean activateSlowMotion() {
+        if (System.currentTimeMillis() - slowMotionActivated < slowMotionDuration) return false;
         slowMotionActivated = System.currentTimeMillis();
+        return true;
     }
 
     public float getGameSpeed() {

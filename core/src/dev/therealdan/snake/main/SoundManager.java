@@ -7,6 +7,7 @@ public class SoundManager {
 
     private Sound consumeapple;
     private Sound gameover;
+    private Sound slowmotion;
     private Sound worldloop;
 
     private float volume;
@@ -14,6 +15,7 @@ public class SoundManager {
     public SoundManager() {
         consumeapple = Gdx.audio.newSound(Gdx.files.internal("sounds/consumeapple.wav"));
         gameover = Gdx.audio.newSound(Gdx.files.internal("sounds/gameover.wav"));
+        slowmotion = Gdx.audio.newSound(Gdx.files.internal("sounds/slowmotion.wav"));
         worldloop = Gdx.audio.newSound(Gdx.files.internal("sounds/worldloop.wav"));
 
         volume = 1;
@@ -51,6 +53,10 @@ public class SoundManager {
 
     public void playWorldLoop() {
         worldloop.play(volume);
+    }
+
+    public void playSlowMotion() {
+        slowmotion.play(volume * 1.35f);
     }
 
     public void playGameOver() {
