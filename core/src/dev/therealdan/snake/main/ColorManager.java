@@ -7,7 +7,7 @@ public class ColorManager {
     private ColorTheme lightTheme;
     private ColorTheme darkTheme;
 
-    private boolean useDark = true;
+    private boolean useDark = false;
 
     public ColorManager() {
         lightTheme = new ColorTheme(
