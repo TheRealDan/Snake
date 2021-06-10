@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dev.therealdan.snake.game.Snake;
+import dev.therealdan.snake.main.scoreapi.ScoreAPI;
 import dev.therealdan.snake.screens.MainMenuScreen;
 
 public class SnakeApp extends Game {
@@ -14,6 +15,7 @@ public class SnakeApp extends Game {
     public FontManager font;
     public SoundManager sound;
     public ColorManager color;
+    public ScoreAPI scoreAPI;
 
     @Override
     public void create() {
@@ -22,6 +24,9 @@ public class SnakeApp extends Game {
         font = new FontManager();
         sound = new SoundManager();
         color = new ColorManager();
+        scoreAPI = new ScoreAPI();
+
+        scoreAPI.updateScores();
 
         setScreen(new MainMenuScreen(this, new Snake(Color.GREEN, 0, 165, 6)));
     }

@@ -11,6 +11,7 @@ import dev.therealdan.snake.game.Apple;
 import dev.therealdan.snake.game.GameInstance;
 import dev.therealdan.snake.game.Snake;
 import dev.therealdan.snake.main.SnakeApp;
+import dev.therealdan.snake.main.scoreapi.Score;
 
 public class GameScreen implements Screen {
 
@@ -55,7 +56,12 @@ public class GameScreen implements Screen {
         app.batch.begin();
         app.batch.setColor(app.color.getTheme().text);
         if (!instance.gameover) {
-            app.font.draw(app.batch, "Score: " + instance.getScore(), -(Gdx.graphics.getWidth() / 2f) + 25, Gdx.graphics.getHeight() / 2f - 25, 16);
+            app.font.center(app.batch, "Score: " + instance.getScore(), 0, Gdx.graphics.getHeight() / 2f - 25, 16);
+            float yOffset = 25;
+            for (Score score : app.scoreAPI.getScores()) {
+                app.font.draw(app.batch, score.Name + ": " + score.Score, -(Gdx.graphics.getWidth() / 2f) + 25, Gdx.graphics.getHeight() / 2f - yOffset, 16);
+                yOffset += 25;
+            }
         } else {
             app.font.center(app.batch, "Game Over!", 0, 50, 32);
             app.font.center(app.batch, "Your Score: " + instance.getScore(), 0, 0, 24);
