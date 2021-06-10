@@ -28,8 +28,6 @@ public class SnakeApp extends Game {
         color = new ColorManager();
         scoreAPI = new ScoreAPI();
 
-        scoreAPI.updateScores();
-
         setScreen(new MainMenuScreen(this, new Snake(Color.GREEN, 0, 165, 6)));
     }
 

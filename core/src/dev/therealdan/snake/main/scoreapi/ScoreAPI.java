@@ -29,7 +29,7 @@ public class ScoreAPI implements Net.HttpResponseListener {
         endpoint = "https://therealdan.dev/umbraco/surface/score";
     }
 
-    public void updateScores() {
+    public void retrieveScores() {
         new Thread(new Runnable() {
             @Override
             public void run() {
