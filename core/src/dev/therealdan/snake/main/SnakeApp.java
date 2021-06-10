@@ -21,7 +21,7 @@ public class SnakeApp extends Game {
     public ShapeRenderer shapeRenderer;
     public SpriteBatch batch;
 
-    public String name = "";
+    public String username;
 
     @Override
     public void create() {
@@ -33,6 +33,8 @@ public class SnakeApp extends Game {
 
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
+
+        username = preferences.getString("Username", "");
 
         setScreen(new MainMenuScreen(this, new Snake(Color.GREEN, 0, 165, 6)));
     }

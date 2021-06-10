@@ -79,7 +79,7 @@ public class GameScreen implements Screen, InputProcessor {
             app.font.center(app.batch, "Game Over!", 0, 90, 32);
             app.font.center(app.batch, "Your Score: " + instance.getScore(), 0, 40, 24);
             app.font.draw(app.batch, "Name", -175, -20, 16);
-            app.font.center(app.batch, app.name + (System.currentTimeMillis() % 1000 > 500 ? "|" : ""), 0, -20, 16);
+            app.font.center(app.batch, app.username + (System.currentTimeMillis() % 1000 > 500 ? "|" : ""), 0, -20, 16);
             app.font.center(app.batch, "Submit", -100, -60, 16);
             app.font.center(app.batch, "Retry", 100, -60, 16);
             app.batch.end();
@@ -132,22 +132,22 @@ public class GameScreen implements Screen, InputProcessor {
         } else {
             String key = Input.Keys.toString(keycode);
             if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".contains(key)) {
-                if (app.name.length() < 16) app.name += key;
+                if (app.username.length() < 16) app.username += key;
                 return true;
             } else if (Input.Keys.BACKSPACE == keycode) {
-                switch (app.name.length()) {
+                switch (app.username.length()) {
                     case 0:
                         break;
                     case 1:
-                        app.name = "";
+                        app.username = "";
                         break;
                     default:
-                        app.name = app.name.substring(0, app.name.length() - 1);
+                        app.username = app.username.substring(0, app.username.length() - 1);
                         break;
                 }
                 return true;
             } else if (Input.Keys.ENTER == keycode) {
-                app.scoreAPI.postScore(app.name, instance.getScore());
+                app.scoreAPI.postScore(app.username, instance.getScore());
                 app.setScreen(new MainMenuScreen(app, instance.snake));
                 dispose();
                 return true;
