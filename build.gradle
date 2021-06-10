@@ -17,7 +17,7 @@ buildscript {
 allprojects {
     apply plugin: "eclipse"
 
-    version = '1.0'
+    version = 'latest'
     ext {
         appName = "Snake"
         gdxVersion = '1.10.0'
