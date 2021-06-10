@@ -37,8 +37,6 @@ public class GameScreen implements Screen, InputProcessor {
         instance = new GameInstance(app.sound, snake);
 
         background = app.color.getTheme().dark.cpy();
-
-        app.scoreAPI.retrieveScores();
     }
 
     @Override

@@ -47,6 +47,8 @@ public class MainMenuScreen implements Screen {
         snake.setLength(6);
         this.snake = snake;
         apple = new Apple(0, 0);
+
+        app.scoreAPI.retrieveScores();
     }
 
     @Override
