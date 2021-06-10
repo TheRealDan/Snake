@@ -30,17 +30,27 @@ public class ScoreAPI implements Net.HttpResponseListener {
     }
 
     public void updateScores() {
-        sendRequest(Net.HttpMethods.GET, endpoint + "/getscores",
-                "scoreboard=" + scoreboard +
-                        "&publicKey=" + publicKey);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                sendRequest(Net.HttpMethods.GET, endpoint + "/getscores",
+                        "scoreboard=" + scoreboard +
+                                "&publicKey=" + publicKey);
+            }
+        }).start();
     }
 
-    public void postScore(String name, int score) {
-        sendRequest(Net.HttpMethods.POST, endpoint + "/addscore",
-                "scoreboard=" + scoreboard +
-                        "&publicKey=" + publicKey +
-                        "&score=" + score +
-                        "&name=" + name);
+    public void postScore(final String name, final int score) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                sendRequest(Net.HttpMethods.POST, endpoint + "/addscore",
+                        "scoreboard=" + scoreboard +
+                                "&publicKey=" + publicKey +
+                                "&score=" + score +
+                                "&name=" + name);
+            }
+        }).start();
     }
 
     private void sendRequest(String httpMethod, String url, String content) {
