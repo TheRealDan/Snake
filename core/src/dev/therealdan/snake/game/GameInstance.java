@@ -40,8 +40,8 @@ public class GameInstance {
 
         snake.handleMovementControls(delta);
         snake.handleMovement(delta);
-        if (snake.handleWorldLooping(worldWidth, worldHeight)) sound.playWorldLoop();
         snake.handleConnectedBody(delta);
+        if (snake.handleWorldLooping(worldWidth, worldHeight)) sound.playWorldLoop();
 
         if (snake.overlapsSelf(worldWidth, worldHeight)) {
             gameover = true;

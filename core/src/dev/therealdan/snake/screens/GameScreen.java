@@ -46,6 +46,8 @@ public class GameScreen implements Screen, InputProcessor {
         ScreenUtils.clear(background);
         background.lerp(System.currentTimeMillis() % backgroundColorInterval > backgroundColorInterval / 2 ? app.color.getTheme().light : app.color.getTheme().dark, 0.005f);
 
+        instance.loop(delta);
+
         camera.update();
         app.shapeRenderer.setProjectionMatrix(camera.combined);
         app.batch.setProjectionMatrix(camera.combined);
@@ -84,8 +86,6 @@ public class GameScreen implements Screen, InputProcessor {
             app.font.center(app.batch, "Retry", 100, -60, 16);
             app.batch.end();
         }
-
-        instance.loop(delta);
     }
 
     @Override
