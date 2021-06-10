@@ -2,9 +2,8 @@ package dev.therealdan.snake.game;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Circle;
 
-public class SnakeBody extends Circle {
+public class SnakeBody extends CircleEntity {
 
     public SnakeBody(float x, float y) {
         radius = 12;

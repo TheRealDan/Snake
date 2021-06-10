@@ -59,7 +59,7 @@ public class GameInstance {
 
     private void handleConsumeApples() {
         for (Apple apple : new ArrayList<>(apples)) {
-            if (snake.overlaps(apple)) {
+            if (snake.overlaps(apple, worldWidth, worldHeight)) {
                 apples.remove(apple);
                 snake.addBody();
                 sound.playConsumeApple();

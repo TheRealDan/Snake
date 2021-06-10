@@ -2,9 +2,8 @@ package dev.therealdan.snake.game;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Circle;
 
-public class Apple extends Circle {
+public class Apple extends CircleEntity {
 
     private Color red;
     private Color green;
