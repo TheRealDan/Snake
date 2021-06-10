@@ -67,6 +67,8 @@ public class GameScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             app.setScreen(new MainMenuScreen(app, instance.snake));
             dispose();
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            instance.activateSlowMotion();
         }
     }
 

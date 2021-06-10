@@ -22,6 +22,11 @@ public class GameInstance {
     private long appleSpawnInterval = 2500;
     public boolean gameover = false;
 
+    private long slowMotionActivated = 0;
+    private long slowMotionTransition = 1000;
+    private long slowMotionDuration = 5000;
+    private float slowMotionSpeed = 0.1f;
+
     public GameInstance(SoundManager sound, Snake snake) {
         random = new Random();
         this.sound = sound;
@@ -31,6 +36,7 @@ public class GameInstance {
 
     public void loop(float delta) {
         if (gameover) return;
+        delta *= getGameSpeed();
 
         snake.handleMovementControls(delta);
         snake.handleMovement(delta);
@@ -69,5 +75,18 @@ public class GameInstance {
 
     public int getScore() {
         return snake.getLength();
+    }
+
+    public void activateSlowMotion() {
+        if (System.currentTimeMillis() - slowMotionActivated < slowMotionDuration) return;
+        slowMotionActivated = System.currentTimeMillis();
+    }
+
+    public float getGameSpeed() {
+        float timepassed = System.currentTimeMillis() - slowMotionActivated;
+        if (timepassed > slowMotionDuration) return 1f;
+        if (timepassed < slowMotionTransition) return Math.max(slowMotionSpeed, 1f - (timepassed / slowMotionTransition));
+        if (timepassed > slowMotionDuration - slowMotionTransition) return slowMotionSpeed + ((timepassed - slowMotionDuration + slowMotionTransition) / slowMotionTransition);
+        return slowMotionSpeed;
     }
 }
