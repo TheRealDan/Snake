@@ -36,7 +36,15 @@ public class Snake {
             while (y < -(worldHeight / 2f)) y += worldHeight;
             while (x > worldWidth / 2f) x -= worldWidth;
             while (y > worldHeight / 2f) y -= worldHeight;
+
             snakeBody.render(shapeRenderer, x, y, color, head);
+            if (snakeBody.nearBorderOf(-(worldWidth / 2f), -(worldHeight / 2f), worldWidth, worldHeight)) {
+                snakeBody.render(shapeRenderer, x + worldWidth, y, color, head);
+                snakeBody.render(shapeRenderer, x - worldWidth, y, color, head);
+                snakeBody.render(shapeRenderer, x, y + worldHeight, color, head);
+                snakeBody.render(shapeRenderer, x, y - worldHeight, color, head);
+            }
+
             head = false;
         }
     }

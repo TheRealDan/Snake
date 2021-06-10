@@ -47,4 +47,12 @@ public class SnakeBody extends Circle {
             shapeRenderer.circle(x - (radius / 3f), y + (radius / 6f), radius / 4f);
         }
     }
+
+    public boolean touchesOutsideOf(float x, float y, float width, float height) {
+        return this.x - radius < x || this.x + radius > x + width || this.y - radius < y || this.y + radius > y + height;
+    }
+
+    public boolean nearBorderOf(float x, float y, float width, float height) {
+        return Math.abs(this.x - x) < radius || Math.abs(this.x - (x + width)) < radius || Math.abs(this.y - y) < radius || Math.abs(this.y - (y + height)) < radius;
+    }
 }
