@@ -51,6 +51,9 @@ public class SnakeApp extends Game {
 
         shapeRenderer.dispose();
         batch.dispose();
+
+        preferences.putString("Username", username);
+        preferences.flush();
     }
 
     @Override
