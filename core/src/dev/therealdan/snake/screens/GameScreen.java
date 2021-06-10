@@ -72,6 +72,9 @@ public class GameScreen implements Screen, InputProcessor {
             app.shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
             app.shapeRenderer.setColor(app.color.getTheme().interfaceBackground);
             app.shapeRenderer.rect(-200, -100, 400, 225);
+            app.shapeRenderer.set(ShapeRenderer.ShapeType.Line);
+            app.shapeRenderer.setColor(app.color.getTheme().interfaceOutline);
+            app.shapeRenderer.rect(-200, -100, 400, 225);
             app.shapeRenderer.end();
 
             app.batch.begin();
