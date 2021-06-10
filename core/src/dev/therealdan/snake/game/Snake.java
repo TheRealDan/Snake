@@ -27,17 +27,16 @@ public class Snake {
     }
 
     public void render(ShapeRenderer shapeRenderer, float worldWidth, float worldHeight) {
+        float x, y;
         boolean head = true;
         for (SnakeBody snakeBody : snakeBodies) {
-            snakeBody.render(shapeRenderer, snakeBody.x, snakeBody.y, color, head);
-            snakeBody.render(shapeRenderer, snakeBody.x + worldWidth, snakeBody.y, color, head);
-            snakeBody.render(shapeRenderer, snakeBody.x - worldWidth, snakeBody.y, color, head);
-            snakeBody.render(shapeRenderer, snakeBody.x, snakeBody.y + worldHeight, color, head);
-            snakeBody.render(shapeRenderer, snakeBody.x, snakeBody.y - worldHeight, color, head);
-            snakeBody.render(shapeRenderer, snakeBody.x + worldWidth, snakeBody.y + worldHeight, color, head);
-            snakeBody.render(shapeRenderer, snakeBody.x - worldWidth, snakeBody.y - worldHeight, color, head);
-            snakeBody.render(shapeRenderer, snakeBody.x + worldWidth, snakeBody.y - worldHeight, color, head);
-            snakeBody.render(shapeRenderer, snakeBody.x - worldWidth, snakeBody.y + worldHeight, color, head);
+            x = snakeBody.x;
+            y = snakeBody.y;
+            while (x < -(worldWidth / 2f)) x += worldWidth;
+            while (y < -(worldHeight / 2f)) y += worldHeight;
+            while (x > worldWidth / 2f) x -= worldWidth;
+            while (y > worldHeight / 2f) y -= worldHeight;
+            snakeBody.render(shapeRenderer, x, y, color, head);
             head = false;
         }
     }
