@@ -64,10 +64,10 @@ public class GameScreen implements Screen, InputProcessor {
             app.batch.begin();
             app.batch.setColor(app.color.getTheme().text);
             app.font.center(app.batch, "Score: " + instance.getScore(), 0, Gdx.graphics.getHeight() / 2f - 25, 16);
-            float yOffset = 25;
+            float yOffset = 20;
             for (Score score : app.scoreAPI.getScores()) {
-                app.font.draw(app.batch, score.Name + ": " + decimalFormat.format(score.Score), -(Gdx.graphics.getWidth() / 2f) + 25, Gdx.graphics.getHeight() / 2f - yOffset, 16);
-                yOffset += 25;
+                app.font.draw(app.batch, score.Name + ": " + decimalFormat.format(score.Score), -(Gdx.graphics.getWidth() / 2f) + 20, Gdx.graphics.getHeight() / 2f - yOffset, 12);
+                yOffset += 20;
             }
             app.batch.end();
         } else {
