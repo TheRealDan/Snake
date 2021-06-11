@@ -92,4 +92,18 @@ public class GameInstance {
         if (timepassed > slowMotionDuration - slowMotionTransition) return slowMotionSpeed + ((timepassed - slowMotionDuration + slowMotionTransition) / slowMotionTransition);
         return slowMotionSpeed;
     }
+
+    public Apple getClosestApple(float x, float y) {
+        Apple closest = null;
+        float distance, closestDistance = 0;
+        for (Apple apple : apples) {
+            distance = apple.distanceTo(x, y);
+            if (distance < closestDistance || closest == null) {
+                closest = apple;
+                closestDistance = distance;
+            }
+        }
+
+        return closest;
+    }
 }

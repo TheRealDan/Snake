@@ -59,7 +59,7 @@ public class GameScreen implements Screen, InputProcessor {
         app.shapeRenderer.begin();
         for (Apple apple : instance.apples)
             apple.render(app.shapeRenderer);
-        instance.snake.render(app.shapeRenderer, instance.worldWidth, instance.worldHeight);
+        instance.snake.render(app.shapeRenderer, instance.worldWidth, instance.worldHeight, instance.getClosestApple(instance.snake.getHead().x, instance.snake.getHead().y));
         app.shapeRenderer.end();
 
         if (!instance.gameover) {

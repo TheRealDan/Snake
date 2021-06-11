@@ -64,7 +64,7 @@ public class MainMenuScreen implements Screen {
 
         app.shapeRenderer.setAutoShapeType(true);
         app.shapeRenderer.begin();
-        snake.render(app.shapeRenderer, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        snake.render(app.shapeRenderer, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), apple);
         apple.render(app.shapeRenderer);
         app.shapeRenderer.end();
 

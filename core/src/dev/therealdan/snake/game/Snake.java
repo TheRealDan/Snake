@@ -26,18 +26,22 @@ public class Snake {
     }
 
     public void render(ShapeRenderer shapeRenderer, float worldWidth, float worldHeight) {
+        render(shapeRenderer, worldWidth, worldHeight, null);
+    }
+
+    public void render(ShapeRenderer shapeRenderer, float worldWidth, float worldHeight, Apple apple) {
         float x, y;
         boolean head = true;
         for (SnakeBody snakeBody : snakeBodies) {
             x = snakeBody.getBoundX(worldWidth);
             y = snakeBody.getBoundY(worldHeight);
 
-            snakeBody.render(shapeRenderer, x, y, color, head);
+            snakeBody.render(shapeRenderer, x, y, color, head, apple);
             if (snakeBody.nearBorderOf(-(worldWidth / 2f), -(worldHeight / 2f), worldWidth, worldHeight)) {
-                snakeBody.render(shapeRenderer, x + worldWidth, y, color, head);
-                snakeBody.render(shapeRenderer, x - worldWidth, y, color, head);
-                snakeBody.render(shapeRenderer, x, y + worldHeight, color, head);
-                snakeBody.render(shapeRenderer, x, y - worldHeight, color, head);
+                snakeBody.render(shapeRenderer, x + worldWidth, y, color, head, apple);
+                snakeBody.render(shapeRenderer, x - worldWidth, y, color, head, apple);
+                snakeBody.render(shapeRenderer, x, y + worldHeight, color, head, apple);
+                snakeBody.render(shapeRenderer, x, y - worldHeight, color, head, apple);
             }
 
             head = false;

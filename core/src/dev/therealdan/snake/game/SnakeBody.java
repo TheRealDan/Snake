@@ -11,7 +11,7 @@ public class SnakeBody extends CircleEntity {
         this.y = y;
     }
 
-    public void render(ShapeRenderer shapeRenderer, float x, float y, Color color, boolean head) {
+    public void render(ShapeRenderer shapeRenderer, float x, float y, Color color, boolean head, Apple apple) {
         shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(color);
         shapeRenderer.circle(x, y, radius);
@@ -21,6 +21,19 @@ public class SnakeBody extends CircleEntity {
         shapeRenderer.circle(x, y, radius);
 
         if (head) {
+            float xOffset = 0;
+            float yOffset = 0;
+            if (apple != null) {
+                if (apple.distanceToX(x) > 50) {
+                    if (x < apple.x) xOffset += radius / 4f;
+                    if (x > apple.x) xOffset -= radius / 4f;
+                }
+                if (apple.distanceToY(y) > 50) {
+                    if (y < apple.y) yOffset += radius / 4f;
+                    if (y > apple.y) yOffset -= radius / 4f;
+                }
+            }
+
             shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setColor(Color.WHITE);
             shapeRenderer.circle(x + (radius / 3f), y + (radius / 6f), radius / 2f);
@@ -31,7 +44,7 @@ public class SnakeBody extends CircleEntity {
 
             shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setColor(Color.BLACK);
-            shapeRenderer.circle(x + (radius / 3f), y + (radius / 6f), radius / 4f);
+            shapeRenderer.circle(x + (radius / 3f) + xOffset, y + (radius / 6f) + yOffset, radius / 4f);
 
             shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setColor(Color.WHITE);
@@ -43,7 +56,7 @@ public class SnakeBody extends CircleEntity {
 
             shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setColor(Color.BLACK);
-            shapeRenderer.circle(x - (radius / 3f), y + (radius / 6f), radius / 4f);
+            shapeRenderer.circle(x - (radius / 3f) + xOffset, y + (radius / 6f) + yOffset, radius / 4f);
         }
     }
 
