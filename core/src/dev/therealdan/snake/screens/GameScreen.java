@@ -30,6 +30,8 @@ public class GameScreen implements Screen, InputProcessor {
     private Color background;
     private long backgroundColorInterval = 10000;
 
+    private boolean hideScoreboard = false;
+
     public GameScreen(SnakeApp app, Snake snake) {
         this.app = app;
 
@@ -64,10 +66,12 @@ public class GameScreen implements Screen, InputProcessor {
             app.batch.begin();
             app.batch.setColor(app.color.getTheme().text);
             app.font.center(app.batch, "Score: " + instance.getScore(), 0, Gdx.graphics.getHeight() / 2f - 25, 16);
-            float yOffset = 20;
-            for (Score score : app.scoreAPI.getScores()) {
-                app.font.draw(app.batch, score.Name + ": " + decimalFormat.format(score.Score), -(Gdx.graphics.getWidth() / 2f) + 20, Gdx.graphics.getHeight() / 2f - yOffset, 12);
-                yOffset += 20;
+            if (!hideScoreboard) {
+                float yOffset = 20;
+                for (Score score : app.scoreAPI.getScores()) {
+                    app.font.draw(app.batch, score.Name + ": " + decimalFormat.format(score.Score), -(Gdx.graphics.getWidth() / 2f) + 20, Gdx.graphics.getHeight() / 2f - yOffset, 12);
+                    yOffset += 20;
+                }
             }
             app.batch.end();
         } else {
@@ -131,6 +135,9 @@ public class GameScreen implements Screen, InputProcessor {
         if (!instance.gameover) {
             if (Input.Keys.E == keycode) {
                 if (instance.activateSlowMotion()) app.sound.playSlowMotion();
+                return true;
+            } else if (Input.Keys.TAB == keycode) {
+                hideScoreboard = !hideScoreboard;
                 return true;
             }
         } else {
