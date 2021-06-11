@@ -72,12 +72,13 @@ public class MainMenuScreen implements Screen {
         app.batch.draw(app.color.isDarkTheme() ? lightningWhite : lightningBlack, darkModeButton.x, darkModeButton.y, darkModeButton.width, darkModeButton.height);
         app.batch.draw(app.color.isDarkTheme() ? app.sound.isMuted() ? muteWhite : speakerWhite : app.sound.isMuted() ? muteBlack : speakerBlack, volumeButton.x, volumeButton.y, volumeButton.width, volumeButton.height);
         app.batch.setColor(app.color.getTheme().text);
-        app.font.center(app.batch, "Use WASD to move", 0, 200, 16);
-        app.font.center(app.batch, "You can use the screen's edges to loop around", 0, 140, 16);
-        app.font.center(app.batch, "Eat apples to grow longer", 0, 50, 16);
-        app.font.center(app.batch, "Any part of the Snake can collect Apples", 0, 10, 16);
-        app.font.center(app.batch, "Don't crash into your body", 0, -90, 16);
-        app.font.center(app.batch, "Press the Spacebar to Start", 0, -180, 16);
+        app.font.center(app.batch, "Use WASD to move", 0, 210, 16);
+        app.font.center(app.batch, "You can use the screen's edges to loop around", 0, 150, 16);
+        app.font.center(app.batch, "Eat apples to grow longer", 0, 60, 16);
+        app.font.center(app.batch, "Any part of the Snake can collect Apples", 0, 20, 16);
+        app.font.center(app.batch, "Don't crash into your body", 0, -70, 16);
+        app.font.center(app.batch, "Tap E to slow down time", 0, -110, 16);
+        app.font.center(app.batch, "Press the Spacebar to Start", 0, -190, 16);
         app.batch.end();
 
         snake.handleMovement(delta);
@@ -86,8 +87,8 @@ public class MainMenuScreen implements Screen {
 
         apple.teleport(130, 43);
 
-        if (snake.getHead().y > 165) snake.getHead().y--;
-        if (snake.getHead().y < 165) snake.getHead().y++;
+        if (snake.getHead().y > 175) snake.getHead().y--;
+        if (snake.getHead().y < 175) snake.getHead().y++;
         if (snake.yVelocity > 0) snake.yVelocity--;
         if (snake.yVelocity < 0) snake.yVelocity++;
 
