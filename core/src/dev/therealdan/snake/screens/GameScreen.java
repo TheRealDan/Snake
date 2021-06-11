@@ -15,9 +15,12 @@ import dev.therealdan.snake.game.Snake;
 import dev.therealdan.snake.main.SnakeApp;
 import dev.therealdan.snake.main.scoreapi.Score;
 
+import java.text.DecimalFormat;
+
 public class GameScreen implements Screen, InputProcessor {
 
     final SnakeApp app;
+    private DecimalFormat decimalFormat = new DecimalFormat("#");
 
     private ScreenViewport viewport;
     private OrthographicCamera camera;
@@ -63,7 +66,7 @@ public class GameScreen implements Screen, InputProcessor {
             app.font.center(app.batch, "Score: " + instance.getScore(), 0, Gdx.graphics.getHeight() / 2f - 25, 16);
             float yOffset = 25;
             for (Score score : app.scoreAPI.getScores()) {
-                app.font.draw(app.batch, score.Name + ": " + score.Score, -(Gdx.graphics.getWidth() / 2f) + 25, Gdx.graphics.getHeight() / 2f - yOffset, 16);
+                app.font.draw(app.batch, score.Name + ": " + decimalFormat.format(score.Score), -(Gdx.graphics.getWidth() / 2f) + 25, Gdx.graphics.getHeight() / 2f - yOffset, 16);
                 yOffset += 25;
             }
             app.batch.end();
