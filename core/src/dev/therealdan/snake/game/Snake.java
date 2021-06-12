@@ -103,16 +103,17 @@ public class Snake {
     }
 
     public void handleConnectedBody(float delta) {
-        if (delta > 0.01f) return;
-
         SnakeBody head = getHead();
         SnakeBody toFollow = head;
+        float xDistance, yDistance;
         for (SnakeBody snakeBody : snakeBodies) {
             if (snakeBody.equals(head)) continue;
 
             if (!snakeBody.overlaps(toFollow)) {
-                snakeBody.x += (snakeBody.x > toFollow.x ? -1 : 1) * Math.abs(snakeBody.x - toFollow.x) * delta * 10;
-                snakeBody.y += (snakeBody.y > toFollow.y ? -1 : 1) * Math.abs(snakeBody.y - toFollow.y) * delta * 10;
+                xDistance = Math.abs(snakeBody.x - toFollow.x);
+                yDistance = Math.abs(snakeBody.y - toFollow.y);
+                snakeBody.x += (snakeBody.x > toFollow.x ? -1 : 1) * Math.min(xDistance, xDistance * delta * 10f);
+                snakeBody.y += (snakeBody.y > toFollow.y ? -1 : 1) * Math.min(yDistance, yDistance * delta * 10f);
             }
 
             toFollow = snakeBody;
