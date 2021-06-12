@@ -29,6 +29,8 @@ public class GameInstance {
     private long slowMotionDuration = 5000;
     private float slowMotionSpeed = 0.1f;
 
+    private long lastMove = System.currentTimeMillis();
+
     public GameInstance(SoundManager sound, Snake snake) {
         random = new Random();
         this.sound = sound;
@@ -64,18 +66,22 @@ public class GameInstance {
         float maxVelocity = 280;
 
         if (Gdx.input.isKeyPressed(Input.Keys.W) && (snake.yVelocity >= Math.abs(snake.xVelocity) || Math.abs(snake.xVelocity) > maxVelocity / 2f)) {
+            lastMove = System.currentTimeMillis();
             snake.yVelocity += 1000 * delta;
             if (snake.yVelocity > maxVelocity) snake.xVelocity += -snake.xVelocity * delta;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S) && (snake.yVelocity <= Math.abs(snake.xVelocity) || Math.abs(snake.xVelocity) > maxVelocity / 2f)) {
+            lastMove = System.currentTimeMillis();
             snake.yVelocity -= 1000 * delta;
             if (snake.yVelocity < maxVelocity) snake.xVelocity += -snake.xVelocity * delta;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A) && (snake.xVelocity <= Math.abs(snake.yVelocity) || Math.abs(snake.yVelocity) > maxVelocity / 2f)) {
+            lastMove = System.currentTimeMillis();
             snake.xVelocity -= 1000 * delta;
             if (snake.xVelocity < maxVelocity) snake.yVelocity += -snake.yVelocity * delta;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D) && (snake.xVelocity >= Math.abs(snake.yVelocity) || Math.abs(snake.yVelocity) > maxVelocity / 2f)) {
+            lastMove = System.currentTimeMillis();
             snake.xVelocity += 1000 * delta;
             if (snake.xVelocity > maxVelocity) snake.yVelocity += -snake.yVelocity * delta;
         }
@@ -98,6 +104,7 @@ public class GameInstance {
 
     private void handleAppleSpawning() {
         if (System.currentTimeMillis() - lastAppleSpawn < appleSpawnInterval) return;
+        if (System.currentTimeMillis() - lastMove > 5000) return;
         lastAppleSpawn = System.currentTimeMillis();
         apples.add(new Apple((random.nextBoolean() ? 1 : -1) * random.nextInt(Gdx.graphics.getWidth() / 2), (random.nextBoolean() ? 1 : -1) * random.nextInt(Gdx.graphics.getHeight() / 2)));
     }
