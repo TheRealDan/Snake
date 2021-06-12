@@ -161,9 +161,10 @@ public class Snake {
         if (getLength() < 2) return false;
 
         SnakeBody head = getHead();
-        SnakeBody neck = getNeck();
+        int index = -1;
         for (SnakeBody snakeBody : snakeBodies) {
-            if (snakeBody.equals(head) || snakeBody.equals(neck)) continue;
+            index++;
+            if (snakeBody.equals(head) || index < 6) continue;
             if (head.overlaps(snakeBody)) return true;
             if (head.contains(snakeBody.getBoundX(worldWidth), snakeBody.getBoundY(worldHeight))) return true;
         }
@@ -201,10 +202,6 @@ public class Snake {
 
     public SnakeBody getHead() {
         return snakeBodies.get(0);
-    }
-
-    public SnakeBody getNeck() {
-        return snakeBodies.get(1);
     }
 
     public SnakeBody getTail() {
