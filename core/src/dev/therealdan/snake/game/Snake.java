@@ -49,7 +49,7 @@ public class Snake {
     }
 
     public void handleMovementControls(float delta) {
-        float maxVelocity = 300;
+        float maxVelocity = 280;
 
         if (Gdx.input.isKeyPressed(Input.Keys.W) && (yVelocity >= Math.abs(xVelocity) || Math.abs(xVelocity) > maxVelocity / 2f)) {
             yVelocity += 1000 * delta;
