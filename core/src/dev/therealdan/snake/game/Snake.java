@@ -1,7 +1,5 @@
 package dev.therealdan.snake.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -46,32 +44,6 @@ public class Snake {
 
             head = false;
         }
-    }
-
-    public void handleMovementControls(float delta) {
-        float maxVelocity = 280;
-
-        if (Gdx.input.isKeyPressed(Input.Keys.W) && (yVelocity >= Math.abs(xVelocity) || Math.abs(xVelocity) > maxVelocity / 2f)) {
-            yVelocity += 1000 * delta;
-            if (yVelocity > maxVelocity) xVelocity += -xVelocity * delta;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.S) && (yVelocity <= Math.abs(xVelocity) || Math.abs(xVelocity) > maxVelocity / 2f)) {
-            yVelocity -= 1000 * delta;
-            if (yVelocity < maxVelocity) xVelocity += -xVelocity * delta;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.A) && (xVelocity <= Math.abs(yVelocity) || Math.abs(yVelocity) > maxVelocity / 2f)) {
-            xVelocity -= 1000 * delta;
-            if (xVelocity < maxVelocity) yVelocity += -yVelocity * delta;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.D) && (xVelocity >= Math.abs(yVelocity) || Math.abs(yVelocity) > maxVelocity / 2f)) {
-            xVelocity += 1000 * delta;
-            if (xVelocity > maxVelocity) yVelocity += -yVelocity * delta;
-        }
-
-        if (xVelocity > maxVelocity) xVelocity = maxVelocity;
-        if (xVelocity < -maxVelocity) xVelocity = -maxVelocity;
-        if (yVelocity > maxVelocity) yVelocity = maxVelocity;
-        if (yVelocity < -maxVelocity) yVelocity = -maxVelocity;
     }
 
     public void handleMovement(float delta) {

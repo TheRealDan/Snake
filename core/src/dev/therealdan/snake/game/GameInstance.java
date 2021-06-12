@@ -1,6 +1,7 @@
 package dev.therealdan.snake.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import dev.therealdan.snake.main.SoundManager;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class GameInstance {
         if (gameover) return;
         delta *= getGameSpeed();
 
-        snake.handleMovementControls(delta);
+        handleMovementControls(snake, delta);
         snake.handleMovement(delta);
         snake.handleConnectedBody(delta);
         if (snake.handleWorldLooping(worldWidth, worldHeight)) sound.playWorldLoop();
@@ -57,6 +58,32 @@ public class GameInstance {
     public void resize(float width, float height) {
         worldWidth = width;
         worldHeight = height;
+    }
+
+    public void handleMovementControls(Snake snake, float delta) {
+        float maxVelocity = 280;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.W) && (snake.yVelocity >= Math.abs(snake.xVelocity) || Math.abs(snake.xVelocity) > maxVelocity / 2f)) {
+            snake.yVelocity += 1000 * delta;
+            if (snake.yVelocity > maxVelocity) snake.xVelocity += -snake.xVelocity * delta;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.S) && (snake.yVelocity <= Math.abs(snake.xVelocity) || Math.abs(snake.xVelocity) > maxVelocity / 2f)) {
+            snake.yVelocity -= 1000 * delta;
+            if (snake.yVelocity < maxVelocity) snake.xVelocity += -snake.xVelocity * delta;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.A) && (snake.xVelocity <= Math.abs(snake.yVelocity) || Math.abs(snake.yVelocity) > maxVelocity / 2f)) {
+            snake.xVelocity -= 1000 * delta;
+            if (snake.xVelocity < maxVelocity) snake.yVelocity += -snake.yVelocity * delta;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.D) && (snake.xVelocity >= Math.abs(snake.yVelocity) || Math.abs(snake.yVelocity) > maxVelocity / 2f)) {
+            snake.xVelocity += 1000 * delta;
+            if (snake.xVelocity > maxVelocity) snake.yVelocity += -snake.yVelocity * delta;
+        }
+
+        if (snake.xVelocity > maxVelocity) snake.xVelocity = maxVelocity;
+        if (snake.xVelocity < -maxVelocity) snake.xVelocity = -maxVelocity;
+        if (snake.yVelocity > maxVelocity) snake.yVelocity = maxVelocity;
+        if (snake.yVelocity < -maxVelocity) snake.yVelocity = -maxVelocity;
     }
 
     private void handleConsumeApples() {
